@@ -2,10 +2,27 @@ let input = document.querySelector("#first_i")
 
 let textarea = document.querySelector("#live")
 
+
+////////////////////Kevin's Part//////////////////////////////////////////////////////////////
+function loadFileAsText() {
+	var fileToLoad = document.getElementById("first_i").files[0];
+
+	var fileReader = new FileReader();
+	fileReader.onload = function (fileLoadedEvent) {
+		var textFromFileLoaded = fileLoadedEvent.target.result;
+		document.querySelector(".CodeMirror").CodeMirror.setValue(textFromFileLoaded);
+	};
+
+	fileReader.readAsText(fileToLoad, "UTF-8");
+}
+////////////////////////////////////////////////////////////////////////////////////////////////
+
 // This event listener has been implemented to identify a
 // Change in the input section of the html code
 // It will be triggered when a file is chosen.
+/*
 input.addEventListener('change', () => {
+
 	let files = input.files;
 
 	if (files.length == 0) return;
@@ -15,7 +32,7 @@ input.addEventListener('change', () => {
 	file variable. But since this is const, it is a read
 	only variable, hence immutable. To make any changes,
 	changing const to var, here and In the reader.onload
-	function would be advisible */
+	function would be advisible
 	const file = files[0];
 
 	let reader = new FileReader();
@@ -35,6 +52,7 @@ input.addEventListener('change', () => {
 	reader.readAsText(file);
 });
 
+
 let input2 = document.querySelector("#second_i")
 
 let textarea2 = document.querySelector("#live2")
@@ -52,7 +70,7 @@ input2.addEventListener('change', () => {
 	file variable. But since this is const, it is a read
 	only variable, hence immutable. To make any changes,
 	changing const to var, here and In the reader.onload
-	function would be advisible */
+	function would be advisible
 	const file = files[0];
 
 	let reader = new FileReader();
@@ -71,3 +89,7 @@ input2.addEventListener('change', () => {
 
 	reader.readAsText(file);
 });
+*/
+
+
+
