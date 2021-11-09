@@ -33,6 +33,69 @@ function loadFileAsText2() {
 	fileReader.readAsText(fileToLoad, "UTF-8");
 }
 
+////////////////////////////////////////////////////////////////////////////////////////
+function saveTextAsFile() {
+	var textToWrite = editor.getValue();
+	var textFileAsBlob = new Blob([ textToWrite ], { type: 'html' });
+	var fileNameToSaveAs = "editor.html"; //filename.extension
+  
+	var downloadLink = document.createElement("a");
+	downloadLink.download = fileNameToSaveAs;
+	downloadLink.innerHTML = "Download File";
+	if (window.webkitURL != null) {
+	  // Chrome allows the link to be clicked without actually adding it to the DOM.
+	  downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+	} else {
+	  // Firefox requires the link to be added to the DOM before it can be clicked.
+	  downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+	  downloadLink.onclick = destroyClickedElement;
+	  downloadLink.style.display = "none";
+	  document.body.appendChild(downloadLink);
+	}
+  
+	downloadLink.click();
+  }
+  
+  var button = document.getElementById('save1');
+  button.addEventListener('click', saveTextAsFile);
+  
+  function destroyClickedElement(event) {
+	// remove the link from the DOM
+	document.body.removeChild(event.target);
+  }
+
+
+
+
+  function saveTextAsFile2() {
+	var textToWrite = editor2.getValue();
+	var textFileAsBlob = new Blob([ textToWrite ], { type: 'html' });
+	var fileNameToSaveAs = "editor.html"; //filename.extension
+  
+	var downloadLink = document.createElement("a");
+	downloadLink.download = fileNameToSaveAs;
+	downloadLink.innerHTML = "Download File";
+	if (window.webkitURL != null) {
+	  // Chrome allows the link to be clicked without actually adding it to the DOM.
+	  downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+	} else {
+	  // Firefox requires the link to be added to the DOM before it can be clicked.
+	  downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+	  downloadLink.onclick = destroyClickedElement;
+	  downloadLink.style.display = "none";
+	  document.body.appendChild(downloadLink);
+	}
+  
+	downloadLink.click();
+  }
+  
+  var button = document.getElementById('save2');
+  button.addEventListener('click', saveTextAsFile2);
+  
+  function destroyClickedElement(event) {
+	// remove the link from the DOM
+	document.body.removeChild(event.target);
+  }
 // This event listener has been implemented to identify a
 // Change in the input section of the html code
 // It will be triggered when a file is chosen.

@@ -45,7 +45,9 @@
                 <input id="first_i" type="file">
                 <button onclick="loadFileAsText()">Load the first editor</button>
                 <!--input id="second_i" , type="file"-->
-
+                <button type="button" id="save1" >Save editor plugin to file</button>
+                
+            
             </div>
 
             <div id="filler">
@@ -56,6 +58,7 @@
                 <input id="second_i" type="file">
                 <button onclick="loadFileAsText2()">Load the second editor</button>
                 <!--input id="second_i" , type="file"-->
+                <button type="button" id="save2" >Save viewer plugin to file</button>
 
             </div>
 
@@ -75,7 +78,7 @@
         </div>
         <div class="Edit-editor" id=editor1 style="position:relative;border: 1px rgb(0, 17, 255) solid; margin: 0.5%;">
 
-            <textarea id="live">Upload to change editor...</textarea>
+            <textarea id="live" class="form-control">Upload to change editor...</textarea>
             <script>
                 var editor = CodeMirror.fromTextArea
                     (document.getElementById('live'), {
