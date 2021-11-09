@@ -2,6 +2,10 @@ let input = document.querySelector("#first_i")
 
 let textarea = document.querySelector("#live")
 
+let input2 = document.querySelector("#second_i")
+
+let textarea2 = document.querySelector("#live2")
+
 
 ////////////////////Kevin's Part//////////////////////////////////////////////////////////////
 function loadFileAsText() {
@@ -16,6 +20,18 @@ function loadFileAsText() {
 	fileReader.readAsText(fileToLoad, "UTF-8");
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////
+
+function loadFileAsText2() {
+	var fileToLoad = document.getElementById("second_i").files[0];
+
+	var fileReader = new FileReader();
+	fileReader.onload = function (fileLoadedEvent) {
+		var textFromFileLoaded = fileLoadedEvent.target.result;
+		document.querySelectorAll(".CodeMirror")[1].CodeMirror.setValue(textFromFileLoaded);
+	};
+
+	fileReader.readAsText(fileToLoad, "UTF-8");
+}
 
 // This event listener has been implemented to identify a
 // Change in the input section of the html code
