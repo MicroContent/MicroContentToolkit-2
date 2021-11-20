@@ -27,7 +27,7 @@
     <script src="../codemirror-5.63.3/addon/fold/xml-fold.js"></script>
     <!--other-->
     <link rel="stylesheet" href="../css/test.css">
-
+    <script src="../js/script.js"></script>
     <style>
         .CodeMirror {
             height: 100%;
@@ -45,9 +45,9 @@
                 <input id="first_i" type="file">
                 <button onclick="loadFileAsText()">Load the first editor</button>
                 <!--input id="second_i" , type="file"-->
-                <button type="button" id="save1" >Save editor plugin to file</button>
-                
-            
+                <button type="button" id="save1">Save editor plugin to file</button>
+
+
             </div>
 
             <div id="filler">
@@ -58,7 +58,7 @@
                 <input id="second_i" type="file">
                 <button onclick="loadFileAsText2()">Load the second editor</button>
                 <!--input id="second_i" , type="file"-->
-                <button type="button" id="save2" >Save viewer plugin to file</button>
+                <button type="button" id="save2">Save viewer plugin to file</button>
 
             </div>
 
@@ -72,7 +72,8 @@
                 <input type="submit" value="Submit"><br>
             </div>
 
-
+            <input type="text" placeholder="Enter website to test..." id="myWebsite">
+            <button type="button" onclick="getWebURL()">Get Value</button>
 
 
         </div>
@@ -157,12 +158,13 @@
             <div class="panel-footer">
                 <button onclick="window.onViewerSubmitListener()">Submit/Undo</button>
             </div>
+            <iframe id="code_result" height="800" width="480" src="" />
         </div>
 
     </div>
 
     <!--<script type="text/javascript" src="../js/jquery-3.6.0.min.js"></script>-->
-    <script src="../js/script.js"></script>
+
 
 </body>
 

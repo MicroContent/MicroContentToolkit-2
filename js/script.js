@@ -36,139 +36,101 @@ function loadFileAsText2() {
 ////////////////////////////////////////////////////////////////////////////////////////
 function saveTextAsFile() {
 	var textToWrite = editor.getValue();
-	var textFileAsBlob = new Blob([ textToWrite ], { type: 'html' });
+	var textFileAsBlob = new Blob([textToWrite], { type: 'html' });
 	var fileNameToSaveAs = "editor.html"; //filename.extension
-  
+
 	var downloadLink = document.createElement("a");
 	downloadLink.download = fileNameToSaveAs;
 	downloadLink.innerHTML = "Download File";
 	if (window.webkitURL != null) {
-	  // Chrome allows the link to be clicked without actually adding it to the DOM.
-	  downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+		// Chrome allows the link to be clicked without actually adding it to the DOM.
+		downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
 	} else {
-	  // Firefox requires the link to be added to the DOM before it can be clicked.
-	  downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
-	  downloadLink.onclick = destroyClickedElement;
-	  downloadLink.style.display = "none";
-	  document.body.appendChild(downloadLink);
+		// Firefox requires the link to be added to the DOM before it can be clicked.
+		downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+		downloadLink.onclick = destroyClickedElement;
+		downloadLink.style.display = "none";
+		document.body.appendChild(downloadLink);
 	}
-  
+
 	downloadLink.click();
-  }
-  
-  var button = document.getElementById('save1');
-  button.addEventListener('click', saveTextAsFile);
-  
-  function destroyClickedElement(event) {
+}
+
+var button = document.getElementById('save1');
+button.addEventListener('click', saveTextAsFile);
+
+function destroyClickedElement(event) {
 	// remove the link from the DOM
 	document.body.removeChild(event.target);
-  }
+}
 
 
 
 
-  function saveTextAsFile2() {
+function saveTextAsFile2() {
 	var textToWrite = editor2.getValue();
-	var textFileAsBlob = new Blob([ textToWrite ], { type: 'html' });
+	var textFileAsBlob = new Blob([textToWrite], { type: 'html' });
 	var fileNameToSaveAs = "editor.html"; //filename.extension
-  
+
 	var downloadLink = document.createElement("a");
 	downloadLink.download = fileNameToSaveAs;
 	downloadLink.innerHTML = "Download File";
 	if (window.webkitURL != null) {
-	  // Chrome allows the link to be clicked without actually adding it to the DOM.
-	  downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+		// Chrome allows the link to be clicked without actually adding it to the DOM.
+		downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
 	} else {
-	  // Firefox requires the link to be added to the DOM before it can be clicked.
-	  downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
-	  downloadLink.onclick = destroyClickedElement;
-	  downloadLink.style.display = "none";
-	  document.body.appendChild(downloadLink);
+		// Firefox requires the link to be added to the DOM before it can be clicked.
+		downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+		downloadLink.onclick = destroyClickedElement;
+		downloadLink.style.display = "none";
+		document.body.appendChild(downloadLink);
 	}
-  
+
 	downloadLink.click();
-  }
-  
-  var button = document.getElementById('save2');
-  button.addEventListener('click', saveTextAsFile2);
-  
-  function destroyClickedElement(event) {
+}
+
+var button = document.getElementById('save2');
+button.addEventListener('click', saveTextAsFile2);
+
+function destroyClickedElement(event) {
 	// remove the link from the DOM
 	document.body.removeChild(event.target);
-  }
-// This event listener has been implemented to identify a
-// Change in the input section of the html code
-// It will be triggered when a file is chosen.
-/*
-input.addEventListener('change', () => {
+}
 
-	let files = input.files;
+//Processing Data
+function getData() {
+	var data = { title: 'no data found' };
+	var url = window.location.href;
+	var regex = new RegExp('[?&]data(=([^&#]*)|&|#|$)');
+	var results = regex.exec(url);
+	if (results && results[2]) {
+		data = JSON.parse(decodeURIComponent(results[2].replace(/\+/g, ' ')));
+	}
+	return data;
+}
 
-	if (files.length == 0) return;
-
-	/* If any further modifications have to be made on the
-	Extracted text. The text can be accessed using the
-	file variable. But since this is const, it is a read
-	only variable, hence immutable. To make any changes,
-	changing const to var, here and In the reader.onload
-	function would be advisible
-	const file = files[0];
-
-	let reader = new FileReader();
-
-	reader.onload = (e) => {
-		const file = e.target.result;
-
-		// This is a regular expression to identify carriage
-		// Returns and line breaks
-		const lines = file.split(/\r\n|\n/);
-		textarea.value = lines.join('\n');
-
-	};
-
-	reader.onerror = (e) => alert(e.target.error.name);
-
-	reader.readAsText(file);
-});
+//Processing the URL
+function getViewerUrl() {
+	var viewerUrl = 'http://localhost:80';
+	var url = window.location.href;
+	var regex = new RegExp('[?&]url(=([^&#]*)|&|#|$)');
+	var results = regex.exec(url);
+	if (results && results[2]) {
+		viewerUrl = decodeURIComponent(results[2].replace(/\+/g, ' '));
+	}
+	return viewerUrl;
+}
 
 
-let input2 = document.querySelector("#second_i")
+function getWebURL() {
+	// Selecting the input element and get its value
 
-let textarea2 = document.querySelector("#live2")
+	var webURL = document.getElementById("myWebsite").value;
+	document.getElementById('code_result').src = webURL;
+};
 
-// This event listener has been implemented to identify a
-// Change in the input section of the html code
-// It will be triggered when a file is chosen.
-input2.addEventListener('change', () => {
-	let files = input2.files;
 
-	if (files.length == 0) return;
 
-	/* If any further modifications have to be made on the
-	Extracted text. The text can be accessed using the
-	file variable. But since this is const, it is a read
-	only variable, hence immutable. To make any changes,
-	changing const to var, here and In the reader.onload
-	function would be advisible
-	const file = files[0];
-
-	let reader = new FileReader();
-
-	reader.onload = (e) => {
-		const file = e.target.result;
-
-		// This is a regular expression to identify carriage
-		// Returns and line breaks
-		const lines = file.split(/\r\n|\n/);
-		textarea2.value = lines.join('\n');
-
-	};
-
-	reader.onerror = (e) => alert(e.target.error.name);
-
-	reader.readAsText(file);
-});
-*/
 
 
 
