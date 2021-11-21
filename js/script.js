@@ -124,9 +124,13 @@ function getViewerUrl() {
 
 function getWebURL() {
 	// Selecting the input element and get its value
-
+	 
+	
+	
 	var webURL = document.getElementById("myWebsite").value;
 	document.getElementById('code_result').src = webURL;
+	// Turns the iframe into a seamless iframe.
+	window.seamless(document.getElementById('code_result'));
 };
 
 

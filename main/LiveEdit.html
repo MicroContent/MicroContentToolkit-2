@@ -37,6 +37,7 @@
         }
     </style>
 
+
 </head>
 
 <body>
@@ -70,11 +71,11 @@
             <div>
                 <label for="url">Enter stylesheet url</label><br>
                 <input style="width: auto;" type="text" id="url" name="url"><br><br>
-                <input type="submit" value="Submit"><br>
+                <input id="sub" type="submit" value="Submit"><br>
             </div>
 
             <input type="text" placeholder="Enter website to test..." id="myWebsite">
-            <button type="button" onclick="getWebURL()">Get Value</button>
+            <button id ="url" type="button" onclick="getWebURL()">Get Value</button>
 
 
         </div>
@@ -162,15 +163,7 @@
             
             <iframe id="code_result" style="width:100%; height:80%" src="" />
 
-            <script type="text/javascript">
-                window.onload = function() {
-                  // Turns the iframe into a seamless iframe.
-                  window.seamless(document.getElementById('code_result'));
-                };
-                window.seamless(document.getElementById('code_result'), {
-                    spinner:'http://www.travistidwell.com/seamless.js/src/loader.gif'
-                });
-              </script>
+            
         </div>
 
     </div>
