@@ -31,7 +31,7 @@ function loadFileAsText2() {
 	};
 
 	fileReader.readAsText(fileToLoad, "UTF-8");
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////
 function saveTextAsFile() {
@@ -54,15 +54,15 @@ function saveTextAsFile() {
 	}
 
 	downloadLink.click();
-}
+};
 
-var button = document.getElementById('save1');
-button.addEventListener('click', saveTextAsFile);
+// var button1 = document.getElementById('save1');
+// button1.addEventListener('click', saveTextAsFile);
 
 function destroyClickedElement(event) {
 	// remove the link from the DOM
 	document.body.removeChild(event.target);
-}
+};
 
 
 
@@ -70,7 +70,7 @@ function destroyClickedElement(event) {
 function saveTextAsFile2() {
 	var textToWrite = editor2.getValue();
 	var textFileAsBlob = new Blob([textToWrite], { type: 'html' });
-	var fileNameToSaveAs = "editor.html"; //filename.extension
+	var fileNameToSaveAs = "viewer.html"; //filename.extension
 
 	var downloadLink = document.createElement("a");
 	downloadLink.download = fileNameToSaveAs;
@@ -89,8 +89,8 @@ function saveTextAsFile2() {
 	downloadLink.click();
 }
 
-var button = document.getElementById('save2');
-button.addEventListener('click', saveTextAsFile2);
+// var button2 = document.getElementById('save2');
+// button2.addEventListener('click', saveTextAsFile2);
 
 function destroyClickedElement(event) {
 	// remove the link from the DOM
