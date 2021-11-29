@@ -1,13 +1,9 @@
 let input = document.querySelector("#first_i")
-
 let textarea = document.querySelector("#live")
-
 let input2 = document.querySelector("#second_i")
-
 let textarea2 = document.querySelector("#live2")
 
 
-////////////////////Kevin's Part//////////////////////////////////////////////////////////////
 function loadFileAsText() {
 	var fileToLoad = document.getElementById("first_i").files[0];
 
@@ -19,7 +15,6 @@ function loadFileAsText() {
 
 	fileReader.readAsText(fileToLoad, "UTF-8");
 }
-////////////////////////////////////////////////////////////////////////////////////////////////
 
 function loadFileAsText2() {
 	var fileToLoad = document.getElementById("second_i").files[0];
@@ -33,7 +28,6 @@ function loadFileAsText2() {
 	fileReader.readAsText(fileToLoad, "UTF-8");
 };
 
-////////////////////////////////////////////////////////////////////////////////////////
 function saveTextAsFile() {
 	var textToWrite = editor.getValue();
 	var textFileAsBlob = new Blob([textToWrite], { type: 'html' });
@@ -56,15 +50,10 @@ function saveTextAsFile() {
 	downloadLink.click();
 };
 
-// var button1 = document.getElementById('save1');
-// button1.addEventListener('click', saveTextAsFile);
-
 function destroyClickedElement(event) {
 	// remove the link from the DOM
 	document.body.removeChild(event.target);
 };
-
-
 
 
 function saveTextAsFile2() {
@@ -89,8 +78,6 @@ function saveTextAsFile2() {
 	downloadLink.click();
 }
 
-// var button2 = document.getElementById('save2');
-// button2.addEventListener('click', saveTextAsFile2);
 
 function destroyClickedElement(event) {
 	// remove the link from the DOM
@@ -122,18 +109,74 @@ function getViewerUrl() {
 }
 
 
-function getWebURL() {
-	// Selecting the input element and get its value
-	 
-	
-	
-	var webURL = document.getElementById("myWebsite").value;
-	document.getElementById('code_result').src = webURL;
-	// Turns the iframe into a seamless iframe.
-	window.seamless(document.getElementById('code_result'));
+//Putting the src code of editor plugin into the CodeMirror-Editor section
+function getSrcintoEditor() {
+	//Raw code from internet
+	var url_editor = document.getElementById("url-editor-input").value;
+
+	fetch(url_editor)
+		.then(x => {
+			return x.text();
+
+		}).then(y => {
+			document.querySelector(".CodeMirror").CodeMirror.setValue(y);
+
+		});
 };
 
+//Reload button to update the iframe
+function reloadEditor() {
+	var editor_code = editor.getValue();
 
+	$.ajax({
+		url: 'http://localhost:9010/',
+		data: { "message": editor_code },
+		type: 'POST',
+		dataType: 'json',
+		success: function (data) {
+			document.getElementById('code_result_editor').src = data.link;
+			//window.seamless(document.getElementById('code_result_editor'));
+		},
+
+		error: function (xhr, status, error) {
+			console.log('Error: ' + error.message);
+		},
+	});
+}
+
+
+//Putting the src code of viewer plugin into the CodeMirror-Viewer section
+function getSrcintoViewer() {
+	//Raw code from internet
+	var url_viewer = document.getElementById("url-viewer-input").value;
+
+	fetch(url_viewer)
+		.then(x => {
+			return x.text();
+		}).then(y => {
+			document.querySelectorAll(".CodeMirror")[1].CodeMirror.setValue(y);
+		});
+};
+
+//Reload button to update the iframe
+function reloadViewer() {
+	var editor_code = editor2.getValue();
+
+	$.ajax({
+		url: 'http://localhost:9012/',
+		data: { "message": editor_code },
+		type: 'POST',
+		dataType: 'json',
+		success: function (data) {
+			document.getElementById('code_result_viewer').src = data.link;
+			//window.seamless(document.getElementById('code_result_viewer'));
+		},
+
+		error: function (xhr, status, error) {
+			console.log('Error: ' + error.message);
+		},
+	});
+}
 
 
 

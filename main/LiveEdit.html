@@ -28,7 +28,8 @@
     <!--other-->
     <link rel="stylesheet" href="../css/test.css">
     <script src="../js/script.js"></script>
-    <script src="../seamless/node_modules/seamless/build/seamless.parent.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="node_modules/seamless/build/seamless.parent.min.js"></script>
     <style>
         .CodeMirror {
             height: 100%;
@@ -36,51 +37,65 @@
             position: absolute
         }
     </style>
+    <script type="text/javascript">
 
+        window.seamless.options.requireCookies = true;
+        window.onload = function () {
+            var child1 = document.getElementById('code_result_viewer');
+            window.seamless(child1);
+        }
+
+    </script>
 
 </head>
 
 <body>
+
+
     <div class="grid-container">
         <div class="Buttons">
-            <div>
+            <div class="Editor-Section">
+
+                <h2>Editor</h2>
                 <input id="first_i" type="file">
                 <button onclick="loadFileAsText()">Load the first editor</button>
-                <!--input id="second_i" , type="file"-->
                 <button type="button" id="save1" onclick="saveTextAsFile()">Save editor plugin to file</button>
 
+                <br><br>
+                <label>Src-Code into Editor Section</label>
+                <input type="text" placeholder="Enter URL..." id="url-editor-input">
+                <button id="url-editor" type="button" onclick="getSrcintoEditor()">Load Editor-CodeMirror</button>
 
             </div>
 
-            <div id="filler">
 
-            </div>
+            <div id="filler"></div>
+            <div id="filler"></div>
 
-            <div>
+
+            <div class="Viewer-Section">
+
+                <h2>Viewer</h2>
                 <input id="second_i" type="file">
                 <button onclick="loadFileAsText2()">Load the second editor</button>
-                <!--input id="second_i" , type="file"-->
                 <button type="button" id="save2" onclick="saveTextAsFile2()">Save viewer plugin to file</button>
 
-            </div>
+                <br><br>
+                <label>Src-Code into Viewer Section</label>
+                <input type="text" placeholder="Enter URL..." id="url-viewer-input">
+                <button id="url" type="button" onclick="getSrcintoViewer()">Load Viewer-CodeMirror</button>
 
-            <div id="filler">
-
-            </div>
-
-            <div>
+                <br><br>
                 <label for="url">Enter stylesheet url</label><br>
-                <input style="width: auto;" type="text" id="url" name="url"><br><br>
-                <input id="sub" type="submit" value="Submit"><br>
+                <input style="width: auto;" placeholder="Enter CSS's URL..." type="text" id="css-url-input"><br>
+                <input type="submit" value="Load CSS"><br>
             </div>
 
-            <input type="text" placeholder="Enter website to test..." id="myWebsite">
-            <button id ="url" type="button" onclick="getWebURL()">Get Value</button>
 
 
         </div>
-        <div class="Edit-editor" id=editor1 style="position:relative;border: 1px rgb(0, 17, 255) solid; margin: 0.5%;">
-
+        <div class="Edit-editor" id="editor1"
+            style="position:relative;border: 1px rgb(0, 17, 255) solid; margin: 0.5%;">
             <textarea id="live" class="form-control">Upload to change editor...</textarea>
             <script>
                 var editor = CodeMirror.fromTextArea
@@ -92,7 +107,6 @@
                         extraKeys: { "Ctrl-Space": "autocomplete" },
                         autoCloseBrackets: true,
                         matchTags: true
-
                     });
 
             </script>
@@ -101,7 +115,8 @@
 
 
 
-        <div class="Edit-viewer" id=editor2 style="position:relative; border: 1px rgb(0, 17, 255) solid; margin: 0.5%;">
+        <div class="Edit-viewer" id="editor2"
+            style="position:relative; border: 1px rgb(0, 17, 255) solid; margin: 0.5%;">
             <textarea id="live2">Upload to change viewer...</textarea>
             <script>
                 var editor2 = CodeMirror.fromTextArea
@@ -126,50 +141,39 @@
         <div class="Editor" id=editor style="border: 1px rgb(0, 17, 255) solid; margin: 0.5%; overflow: scroll">
             <div class="panel-heading">
                 <h2>Editor</h2>
-                <p>
-                    <button class="btn btn-raised btn-info" onclick="reloadEditor()">Reload Editor</button>
-                </p>
+                <button class="btn btn-raised btn-info" onclick="reloadEditor()">Reload Editor</button>
             </div>
             <div class="panel-body" id="editor_container"></div>
-        </div>
 
+            <iframe id="code_result_editor" style="width:95%; height:70%" src="" /></iframe>
+
+        </div>
 
         <div class="Data" id=data style="border: 1px rgb(0, 17, 255) solid; margin: 0.5%; overflow: scroll">
             <div class="panel-heading">
                 <h2>Data</h2>
-                <p>
-                    <button class="btn btn-raised btn-info" onclick="loadDataFromEditor()">Load Data from
-                        Editor</button>
-                </p>
+                <button class="btn btn-raised btn-info" onclick="loadDataFromEditor()">Load Data from Editor</button>
             </div>
             <div class="panel-body">
                 <textarea id="data-input" style="width: 80%; min-height: 150px"></textarea>
             </div>
         </div>
 
-
         <div class="Viewer" id=viewer style="border: 1px rgb(0, 17, 255) solid; margin: 0.5%; overflow: scroll">
             <div class="panel-heading">
                 <h2>Viewer</h2>
-                <p>
-                    <button class="btn btn-raised btn-info" onclick="reloadViewer()">Reload Viewer</button>
-                </p>
-
+                <button class="btn btn-raised btn-info" onclick="reloadViewer()">Reload Viewer</button>
             </div>
             <div class="panel-body" id="viewer_container"></div>
+            <br>
             <div class="panel-footer">
                 <button onclick="window.onViewerSubmitListener()">Submit/Undo</button>
             </div>
-            
-            <iframe id="code_result" style="width:100%; height:80%" src="" />
 
-            
+            <iframe id="code_result_viewer" style="width:95%; height:70%" src="" />
+
         </div>
-
     </div>
-
-    <!--<script type="text/javascript" src="../js/jquery-3.6.0.min.js"></script>-->
-
 
 </body>
 
