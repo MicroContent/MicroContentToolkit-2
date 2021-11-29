@@ -12,7 +12,7 @@ Dependencies:<br>
 <h2>Start & Run the Server</h2>
 <ol>
   <li> <code>cd</code> to the <code>Primary-rep</code>-Folder with a Terminal or Powershell</li>
-  <li> Check if the <code>server.js</code> and <code>package_lock.json</code> are inside the <code>Primary-rep</code>-Folder </li>
+  <li> Check if the <code>server.js</code> and <code>package.json</code> are inside the <code>Primary-rep</code>-Folder </li>
   <li> Go to your Terminal/Powershell again and type <code>npm i</code></li>
   <li> Then type <code>node server.js</code></li>
   <li> Go to any browser and enter <a href="http://localhost:8080/">http://localhost:8080/</a></li>
