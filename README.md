@@ -7,7 +7,14 @@ Used libraries:<br>
   
 Dependencies:<br>
   To use seamless you need to have a seamless folder inside the root directory and have seamless installed in there. (run: npm i seamless in cmd)
+  <br><br>
+  Source Code for testing:
+  <br>
+  Raw URL-Src-Code for Editor and Viewer:
+  https://github.com/MicroContent/MicroContent.github.io/blob/master/MicroContentList.json
+  <br>
   
+  <br>
 <br>
 <h2>Start & Run the Server</h2>
 <ol>
