@@ -1,14 +1,3 @@
-//The (editor)plugin-file as input in the editor section
-let input = document.querySelector("#first_i")
-//The 1st CodeMirror textarea (editor part)
-let textarea = document.querySelector("#live")
-
-//The viewer file as input in the viewer section
-let input2 = document.querySelector("#second_i")
-//The 2nd CodeMirror textarea (viewer part)
-let textarea2 = document.querySelector("#live2")
-
-
 //Button's function to load the editor code into 1st CodeMirror frame
 function loadFileAsText() {
 	
