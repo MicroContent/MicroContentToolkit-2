@@ -1,33 +1,49 @@
+//The (editor)plugin-file as input in the editor section
 let input = document.querySelector("#first_i")
+//The 1st CodeMirror textarea (editor part)
 let textarea = document.querySelector("#live")
+
+//The viewer file as input in the viewer section
 let input2 = document.querySelector("#second_i")
+//The 2nd CodeMirror textarea (viewer part)
 let textarea2 = document.querySelector("#live2")
 
 
+//Button's function to load the editor code into 1st CodeMirror frame
 function loadFileAsText() {
+	
+	//The loaded plugin-file from the editor section
 	var fileToLoad = document.getElementById("first_i").files[0];
-
+	
+	//Read the file,
+	//extract the content out of it,
+	//Put the content directly into the 1st CodeMirror frame
+	fileReader.readAsText(fileToLoad, "UTF-8");
 	var fileReader = new FileReader();
 	fileReader.onload = function (fileLoadedEvent) {
 		var textFromFileLoaded = fileLoadedEvent.target.result;
 		document.querySelector(".CodeMirror").CodeMirror.setValue(textFromFileLoaded);
 	};
-
-	fileReader.readAsText(fileToLoad, "UTF-8");
 }
 
+//Button's function to load the viewer code into 2nd CodeMirror frame
 function loadFileAsText2() {
+	
+	//The loaded file from the viewer section
 	var fileToLoad = document.getElementById("second_i").files[0];
 
+	//Read the file,
+	//extract the content out of it,
+	//Put the content directly into the 2nd CodeMirror frame
+	fileReader.readAsText(fileToLoad, "UTF-8");
 	var fileReader = new FileReader();
 	fileReader.onload = function (fileLoadedEvent) {
 		var textFromFileLoaded = fileLoadedEvent.target.result;
 		document.querySelectorAll(".CodeMirror")[1].CodeMirror.setValue(textFromFileLoaded);
 	};
-
-	fileReader.readAsText(fileToLoad, "UTF-8");
 };
 
+//Function to save the editor code from the 1st CodeMirror frame locally as a HTML file
 function saveTextAsFile() {
 	var textToWrite = editor.getValue();
 	var textFileAsBlob = new Blob([textToWrite], { type: 'html' });
@@ -50,12 +66,7 @@ function saveTextAsFile() {
 	downloadLink.click();
 };
 
-function destroyClickedElement(event) {
-	// remove the link from the DOM
-	document.body.removeChild(event.target);
-};
-
-
+//Function to save the viewer code from the 2nd CodeMirror frame locally as a HTML file
 function saveTextAsFile2() {
 	var textToWrite = editor2.getValue();
 	var textFileAsBlob = new Blob([textToWrite], { type: 'html' });
@@ -74,105 +85,137 @@ function saveTextAsFile2() {
 		downloadLink.style.display = "none";
 		document.body.appendChild(downloadLink);
 	}
-
+	
 	downloadLink.click();
 }
 
 
-function destroyClickedElement(event) {
-	// remove the link from the DOM
-	document.body.removeChild(event.target);
-}
-
-//Processing Data
-function getData() {
-	var data = { title: 'no data found' };
-	var url = window.location.href;
-	var regex = new RegExp('[?&]data(=([^&#]*)|&|#|$)');
-	var results = regex.exec(url);
-	if (results && results[2]) {
-		data = JSON.parse(decodeURIComponent(results[2].replace(/\+/g, ' ')));
-	}
-	return data;
-}
-
-//Processing the URL
-function getViewerUrl() {
-	var viewerUrl = 'http://localhost:80';
-	var url = window.location.href;
-	var regex = new RegExp('[?&]url(=([^&#]*)|&|#|$)');
-	var results = regex.exec(url);
-	if (results && results[2]) {
-		viewerUrl = decodeURIComponent(results[2].replace(/\+/g, ' '));
-	}
-	return viewerUrl;
-}
 
 
-//Putting the src code of editor plugin into the CodeMirror-Editor section
+
+
+//"Load Editor-CodeMirror"-Buttons' function
+// to retrieve the content of URL & place it into 1nd CodeMirror frame (editor part)
 function getSrcintoEditor() {
-	//Raw code from internet
+	
+	//Retrieve the whole URL from the input of the editor section
 	var url_editor = document.getElementById("url-editor-input").value;
-
+	
+	//Using the Fetch API to retrieve the content of the URL's website
 	fetch(url_editor)
+		
+		//1st operation after successful retrieval
 		.then(x => {
+		
+			//return the whole content in plain text form
 			return x.text();
-
+		
+		//2nd operation directly after the 1st one
 		}).then(y => {
+		
+			//Change the whole 1st CodeMirror frame (editor part) with the retrieved content
 			document.querySelector(".CodeMirror").CodeMirror.setValue(y);
 
 		});
 };
 
-//Reload button to update the iframe
+//"Reload Editor"-button's function
+//to update the editor-iframe
 function reloadEditor() {
+	
+	//Retrieve the editor-code from 1st CodeMirror frame
 	var editor_code = editor.getValue();
 
+	//Using AJAX with JQuery to send all data from client (script.js) to server (server.js)
 	$.ajax({
-		url: 'http://localhost:9010/',
-		data: { "message": editor_code },
-		type: 'POST',
-		dataType: 'json',
-		success: function (data) {
-			document.getElementById('code_result_editor').src = data.link;
-			//window.seamless(document.getElementById('code_result_editor'));
-		},
 
+		//All data is packed into a single request with the following information:
+		//URL to be destined for this request
+		url: 'http://localhost:9010/',
+		//editor-code from 2nd CodeMirror frame, which is inside a JSON
+		data: { "message": editor_code },
+		//Request method
+		type: 'POST',
+		//Defining the type of the data (editor-code)
+		dataType: 'json',
+		
+		//If the sending process was successful, then execute the following function with the received data from the server
+		success: function (data) {
+			
+			//Change the editor's iframe directly by giving it the right URL (localhost:9011)
+			document.getElementById('code_result_editor').src = data.link;
+		},
+		
+		//If the sending process failed, then execute the following function
 		error: function (xhr, status, error) {
+			
+			//Printing the error into the console of the client (web browser)
 			console.log('Error: ' + error.message);
 		},
 	});
 }
 
 
-//Putting the src code of viewer plugin into the CodeMirror-Viewer section
+
+
+
+
+
+//"Load Viewer-CodeMirror"-Buttons' function
+// to retrieve the content of URL & place it into 2nd CodeMirror frame (viewer part)
 function getSrcintoViewer() {
-	//Raw code from internet
+	
+	//Retrieve the whole URL from the input of the viewer section
 	var url_viewer = document.getElementById("url-viewer-input").value;
 
+	//Using the Fetch API to retrieve the content of the URL's website
 	fetch(url_viewer)
+	
+		//1st operation after successful retrieval
 		.then(x => {
+		
+			//return the whole content in plain text form
 			return x.text();
+		
+		//2nd operation directly after the 1st one
 		}).then(y => {
+		
+			//Change the whole 2nd CodeMirror frame (viewer part) with the retrieved content
 			document.querySelectorAll(".CodeMirror")[1].CodeMirror.setValue(y);
 		});
 };
 
-//Reload button to update the iframe
+//"Reload Viewer"-button's function
+//to update the viewer-iframe
 function reloadViewer() {
-	var editor_code = editor2.getValue();
+	
+	//Retrieve the viewer-code from 2nd CodeMirror frame
+	var viewer_code = editor2.getValue();
 
+	//Using AJAX with JQuery to send all data from client (script.js) to server (server.js)
 	$.ajax({
+		
+		//All data is packed into a single request with the following information:
+		//URL to be destined for this request
 		url: 'http://localhost:9012/',
-		data: { "message": editor_code },
+		//viewer-code from 2nd CodeMirror frame, which is inside a JSON
+		data: { "message": viewer_code },
+		//Request method
 		type: 'POST',
+		//Defining the type of the data (viewer-code)
 		dataType: 'json',
+		
+		//If the sending process was successful, then execute the following function with the received data from the server
 		success: function (data) {
+			
+			//Change the viewer's iframe directly by giving it the right URL (localhost:9013)
 			document.getElementById('code_result_viewer').src = data.link;
-			//window.seamless(document.getElementById('code_result_viewer'));
 		},
-
+		
+		//If the sending process failed, then execute the following function
 		error: function (xhr, status, error) {
+			
+			//Printing the error into the console of the client (web browser)
 			console.log('Error: ' + error.message);
 		},
 	});
