@@ -91,7 +91,8 @@ function onRequest_a(req, response) {
 app.listen(9010, () => {
 });
 
-//The content which is received from Port 9010 should understand:
+//The content which came from a port (from client) should be understood by the app
+//And the app is capable of understanding the following types of content adn to use special functions to receive the content:
 //JSON
 app.use(bodyParser.json());
 //URL
@@ -134,7 +135,8 @@ http.createServer(function (req, res) {
 app.listen(9012, () => {
 });
 
-//The content which is received from Port 9010 should understand:
+//The content which came from a port (from client) should be understood by the app
+//And the app is capable of understanding the following types of content adn to use special functions to receive the content:
 //JSON
 app.use(bodyParser.json());
 //URL
