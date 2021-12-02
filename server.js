@@ -22,7 +22,7 @@ var mimeTypes = {
 };
 
 
-//Only HTML without CSS and JS
+//The whole function is being used to load only HTML without CSS and JS (toolkit without CSS and JS)
 const server = http.createServer(function (req, res) {
     res.writeHead(200, { 'Content-Type': 'text/html' })
     fs.readFile('main/LiveEdit.html', function (error, data) { //main toolkit site
@@ -36,7 +36,7 @@ const server = http.createServer(function (req, res) {
     })
 })
 
-//Loading only HTML (toolkit without CSS and JS)
+//The server is listening on port 8081 to execute the above function
 server.listen(8081, function (error) {
     if (error) {
         console.log('something went wrong', error);
@@ -45,9 +45,10 @@ server.listen(8081, function (error) {
     }
 })
 
-
-//toolkit (HTML + CSS + JS)
+//The whole function is being used to load also CSS and JS (HTML + CSS + JS))
+//The server is listening on port 8080
 http.createServer(onRequest_a).listen(8080);
+
 //Loading CSS and JS with HTML
 function onRequest_a(req, response) {
     var uri = url.parse(req.url).pathname,
@@ -80,49 +81,90 @@ function onRequest_a(req, response) {
 }
 
 
+////////////////////////////////////////////////////////////////////////////////////////////
+/*                  Important functions to change or add starts here!                    */
+////////////////////////////////////////////////////////////////////////////////////////////
 
 
-//Receiving editor-plugin-code
+//Server is listening on port 9010 now
+//to receive the editor code from the 1st CodeMirror frame
 app.listen(9010, () => {
 });
 
+//The content which is received from Port 9010 should understand:
+//JSON
 app.use(bodyParser.json());
+//URL
 app.use(bodyParser.urlencoded({ extended: false }));
+//CORS (Cross-Origin Resource Sharing)
 app.use(cors({ origin: 'http://localhost:8080' }));
 
+//The URL with the port 9010 is only accessable through a POST-request by the client
 app.post("/", (req, res) => {
+    
     var body = '';
+    
+    //Gets the content (editor-code) directly from the sent request (which is a JSON)
     editor_plug_code = req.body.message;
+    
+    //Send the the new URL with different port to the client
     res.send({ "link": "http://localhost:9011" });
+    
 });
 
-//loading editor-plugin for editor-iframe
+//Server is listening on port 9011 now
 http.createServer(function (req, res) {
+    
+    //The previously temporarily stored editor-code is being written on the site with URL+port(9011) and sent directly to the client back
+    //(Sending it for the iframe)
     res.write(editor_plug_code);
+    
+    //Response is complete (the response is ready to be sent)
     res.end();
+
 }).listen(9011);
 
 
 
 
+
+
+//Listening on Port 9012 
+//to receive the viewer code from the 2nd CodeMirror frame
 app.listen(9012, () => {
 });
 
+//The content which is received from Port 9010 should understand:
+//JSON
 app.use(bodyParser.json());
+//URL
 app.use(bodyParser.urlencoded({ extended: false }));
+//CORS (Cross-Origin Resource Sharing)
 app.use(cors({ origin: 'http://localhost:8080' }));
 
+//The URL with the port 9013 is only accessable through a POST-request by the client
 app.post("/", (req, res) => {
+    
     var body = '';
+    
+    //Gets the content (viewer-code) directly from the sent request (which is a JSON)
     editor_plug_code = req.body.message;
+    
+    //Send the the new URL with different port to the client
     res.send({ "link": "http://localhost:9013" });
 });
 
 
-//loading viewer-plugin for viewer-iframe
+//Server is listening on port 9013 now
 http.createServer(function (req, res) {
+    
+    //The previously temporarily stored editor-code is being written on the site with URL+port(9013) and sent directly to the client back
+    //(Sending it for the iframe)
     res.write(viewer_plug_code);
+    
+    //Response is complete (the response is ready to be sent)
     res.end();
+    
 }).listen(9013);
 
 
