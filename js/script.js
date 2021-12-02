@@ -7,8 +7,8 @@ function loadFileAsText() {
 	//Read the file,
 	//extract the content out of it,
 	//Put the content directly into the 1st CodeMirror frame
-	fileReader.readAsText(fileToLoad, "UTF-8");
 	var fileReader = new FileReader();
+	fileReader.readAsText(fileToLoad, "UTF-8");
 	fileReader.onload = function (fileLoadedEvent) {
 		var textFromFileLoaded = fileLoadedEvent.target.result;
 		document.querySelector(".CodeMirror").CodeMirror.setValue(textFromFileLoaded);
@@ -24,8 +24,8 @@ function loadFileAsText2() {
 	//Read the file,
 	//extract the content out of it,
 	//Put the content directly into the 2nd CodeMirror frame
-	fileReader.readAsText(fileToLoad, "UTF-8");
 	var fileReader = new FileReader();
+	fileReader.readAsText(fileToLoad, "UTF-8");	
 	fileReader.onload = function (fileLoadedEvent) {
 		var textFromFileLoaded = fileLoadedEvent.target.result;
 		document.querySelectorAll(".CodeMirror")[1].CodeMirror.setValue(textFromFileLoaded);
