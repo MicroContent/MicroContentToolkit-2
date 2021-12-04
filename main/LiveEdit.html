@@ -30,6 +30,7 @@
     <script src="../js/script.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="../node_modules/seamless/build/seamless.parent.min.js"></script>
+    
     <style>
         .CodeMirror {
             height: 100%;
@@ -38,19 +39,27 @@
         }
     </style>
     <script type="text/javascript">
-
         window.seamless.options.requireCookies = true;
-        window.onload = function () {
-            var child1 = document.getElementById('code_result_viewer');
+        window.onload = function() {
+            var child1 = document.getElementById('code_result_viewer')
+            // Turns the iframe into a seamless iframe.
             window.seamless(child1);
-        }
+
+            window.injectStyles = function(event) {
+            
+                event.preventDefault();
+                    child1.send({
+                        type: 'seamless_styles',
+                        data: [document.getElementById('childstyles2').value]
+                    });
+                };
+            };
 
     </script>
 
 </head>
 
 <body>
-
 
     <div class="grid-container">
         <div class="Buttons">
@@ -86,9 +95,11 @@
                 <button id="url" type="button" onclick="getSrcintoViewer()">Load Viewer-CodeMirror</button>
 
                 <br><br>
-                <label for="url">Enter stylesheet url</label><br>
-                <input style="width: auto;" placeholder="Enter CSS's URL..." type="text" id="css-url-input"><br>
-                <input type="submit" value="Load CSS"><br>
+                <!--seamless injection-->
+                <label for="url">Open Stylesheet</label><br>
+                <input style="width: auto;" placeholder="Enter CSS's URL..." type="file" id="childstyles"><br>
+                <input id="childstyles2" type="text" placeholder="Enter a style">
+                <a href="#" id="injectstyles" onclick="injectStyles(event)" class="button postfix">Submit</a>
             </div>
 
 
@@ -162,7 +173,7 @@
         <div class="Viewer" id=viewer style="border: 1px rgb(0, 17, 255) solid; margin: 0.5%; overflow: scroll">
             <div class="panel-heading">
                 <h2>Viewer</h2>
-                <button class="btn btn-raised btn-info" onclick="reloadViewer()">Reload Viewer</button>
+                <button  class="btn btn-raised btn-info" onclick="reloadViewer()">Reload Viewer</button>
             </div>
             <div class="panel-body" id="viewer_container"></div>
             <br>
@@ -174,7 +185,31 @@
 
         </div>
     </div>
-
+    <!--injection script-->
+    <script>
+        document.getElementById("childstyles").addEventListener("change", readFileAsString)
+        function readFileAsString() {
+            f=document.getElementById('childstyles')
+            var files = f.files;
+            if (files.length === 0) {
+                console.log('No file is selected');
+                return;
+            }
+    
+            var reader = new FileReader();
+            
+            reader.onload = function() {
+                console.log(reader.result) 
+                var  outp= reader.result;
+                var fin=document.getElementById('childstyles2');
+                fin.value=outp;
+            };
+            reader.readAsText(files[0]);
+            console.log(reader)
+            console.log(reader.result)
+            
+        }
+    </script>
 </body>
 
 </html>

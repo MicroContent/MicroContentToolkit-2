@@ -1,0 +1,27 @@
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PoolSelectionViewer</title>
+   
+    
+    
+    <script src='../node_modules/seamless/build/seamless.child.min.js'></script>
+</head>
+
+<body>
+    <script type="text/javascript">
+        
+        // Connect to the parent page.
+        var connection = window.seamless.connect({
+            url: 'http://localhost:8080/',
+            allowStyleInjection: true,
+        }); 
+    </script>
+    <!-- <script>
+        document.getElementById("question").innerText="hyolo"
+    </script> -->
+    <p id="question"></p>
+</body>
+
+</html>

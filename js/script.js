@@ -199,6 +199,8 @@ function reloadViewer() {
 			
 			//Change the viewer's iframe directly by giving it the right URL (localhost:9013)
 			document.getElementById('code_result_viewer').src = data.link;
+			
+			
 		},
 		
 		//If the sending process failed, then execute the following function
@@ -208,7 +210,10 @@ function reloadViewer() {
 			console.log('Error: ' + error.message);
 		},
 	});
+	
 }
+
+
 
 
 
