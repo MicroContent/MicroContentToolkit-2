@@ -39,11 +39,79 @@
         }
     </style>
     <script type="text/javascript">
-        window.seamless.options.requireCookies = true;
-        window.onload = function() {
-            var child1 = document.getElementById('code_result_viewer')
-            // Turns the iframe into a seamless iframe.
+        var titleV;
+        var questionV;
+        // window.onload = function() {
+        //     var child1 = document.getElementById('code_result_viewer');
+        //     var child2 = document.getElementById('code_result_editor');
+        //     // Turns the iframe into a seamless iframe.
+        //     window.seamless(child1);
+        //     window.seamless(child2);
+
+            
+        //     child2.receive(function(data) {
+        //         switch(data.type) {
+        //             case 'toViewer':
+        //             if (data.hasOwnProperty('title')) {
+        //                 titleV = data.title;
+        //             }
+        //             if (data.hasOwnProperty('question')) {
+        //                 questionV= data.question;
+        //             }
+        //             console.log("got: ",titleV,questionV)
+        //             break;
+        //         }
+        //     });
+        //     window.sendToChild = function(event) {
+        //         event.preventDefault();
+        //         console.log("send:",titleV,questionV)
+        //         child1.send({
+        //             type: 'setContent',
+        //             title: titleV,
+        //             question: questionV
+        //             });
+        //         };
+
+        //     window.injectStyles = function(event) {
+            
+        //         event.preventDefault();
+        //             child1.send({
+        //                 type: 'seamless_styles',
+        //                 data: [document.getElementById('childstyles2').value]
+        //             });
+        //         };
+        //     };
+        
+        function child2load(){
+            var child2 = document.getElementById('code_result_editor');
+            window.seamless(child2);
+            child2.receive(function(data) {
+                switch(data.type) {
+                    case 'toViewer':
+                    if (data.hasOwnProperty('title')) {
+                        titleV = data.title;
+                    }
+                    if (data.hasOwnProperty('question')) {
+                        questionV= data.question;
+                    }
+                    console.log("got: ",titleV,questionV)
+                    break;
+                }
+            });
+        };
+
+        function child1load(){
+            var child1 = document.getElementById('code_result_viewer');
             window.seamless(child1);
+            window.sendToChild = function(event) {
+                event.preventDefault();
+                console.log("send:",titleV,questionV)
+                child1.send({
+                    type: 'setContent',
+                    title: titleV,
+                    question: questionV
+                    });
+                };
 
             window.injectStyles = function(event) {
             
@@ -95,11 +163,45 @@
                 <button id="url" type="button" onclick="getSrcintoViewer()">Load Viewer-CodeMirror</button>
 
                 <br><br>
+                
+            </div>
+            <div id="filler"></div>
+            <div id="filler"></div>
+            <div class="Injection-Section">
+
+                <h2>Style Injection</h2>
                 <!--seamless injection-->
                 <label for="url">Open Stylesheet</label><br>
+                
                 <input style="width: auto;" placeholder="Enter CSS's URL..." type="file" id="childstyles"><br>
                 <input id="childstyles2" type="text" placeholder="Enter a style">
-                <a href="#" id="injectstyles" onclick="injectStyles(event)" class="button postfix">Submit</a>
+                <button type="button" style="width: auto;" onclick="injectStyles(event)">Submit</button>
+                <!-- <a href="#" id="injectstyles" onclick="injectStyles(event)" class="button postfix">Submit</a> -->
+                <script>
+                    document.getElementById("childstyles").addEventListener("change", readFileAsString)
+                    function readFileAsString() {
+                        f=document.getElementById('childstyles')
+                        var files = f.files;
+                        if (files.length === 0) {
+                            console.log('No file is selected');
+                            return;
+                        }
+                
+                        var reader = new FileReader();
+                        
+                        reader.onload = function() {
+                            console.log(reader.result) 
+                            var  outp= reader.result;
+                            var fin=document.getElementById('childstyles2');
+                            fin.value=outp;
+                        };
+                        reader.readAsText(files[0]);
+                        console.log(reader)
+                        console.log(reader.result)
+                        
+                    }
+                </script>
+
             </div>
 
 
@@ -128,7 +230,7 @@
 
         <div class="Edit-viewer" id="editor2"
             style="position:relative; border: 1px rgb(0, 17, 255) solid; margin: 0.5%;">
-            <textarea id="live2">Upload to change viewer...</textarea>
+            <textarea id="live2" class="form-control">Upload to change viewer...</textarea>
             <script>
                 var editor2 = CodeMirror.fromTextArea
                     (document.getElementById('live2'), {
@@ -149,31 +251,33 @@
 
 
 
-        <div class="Editor" id=editor style="border: 1px rgb(0, 17, 255) solid; margin: 0.5%; overflow: scroll">
+        <div class="Editor" id='editor' style=" border: 1px rgb(0, 17, 255) solid; margin: 0.5%; overflow: scroll">
             <div class="panel-heading">
                 <h2>Editor</h2>
-                <button class="btn btn-raised btn-info" onclick="reloadEditor()">Reload Editor</button>
+                <button class="btn btn-raised btn-info" onclick="reloadEditor(); child2load()">Reload Editor</button>
             </div>
             <div class="panel-body" id="editor_container"></div>
 
-            <iframe id="code_result_editor" style="width:95%; height:70%" src="" /></iframe>
+            <iframe id="code_result_editor" style="width:95%; height:80%" scrolling="yes" src="" ></iframe>
 
         </div>
 
-        <div class="Data" id=data style="border: 1px rgb(0, 17, 255) solid; margin: 0.5%; overflow: scroll">
+        <div class="Data" id='data' style="border: 1px rgb(0, 17, 255) solid; margin: 0.5%; overflow: scroll">
             <div class="panel-heading">
                 <h2>Data</h2>
-                <button class="btn btn-raised btn-info" onclick="loadDataFromEditor()">Load Data from Editor</button>
+                <!-- send to viewer -->
+                <button type="button" style="width: auto;" onclick="sendToChild(event)">Send data to viewer</button>
+                <!-- <a href="#" id="sendToChild" onclick="sendToChild(event)" class="button postfix">Load Data from Editor</a> -->
             </div>
             <div class="panel-body">
                 <textarea id="data-input" style="width: 80%; min-height: 150px"></textarea>
             </div>
         </div>
 
-        <div class="Viewer" id=viewer style="border: 1px rgb(0, 17, 255) solid; margin: 0.5%; overflow: scroll">
+        <div class="Viewer" id='viewer' style=" border: 1px rgb(0, 17, 255) solid; margin: 0.5%; overflow: scroll" >
             <div class="panel-heading">
                 <h2>Viewer</h2>
-                <button  class="btn btn-raised btn-info" onclick="reloadViewer()">Reload Viewer</button>
+                <button  class="btn btn-raised btn-info" onclick="reloadViewer(); child1load()">Reload Viewer</button>
             </div>
             <div class="panel-body" id="viewer_container"></div>
             <br>
@@ -181,35 +285,12 @@
                 <button onclick="window.onViewerSubmitListener()">Submit/Undo</button>
             </div>
 
-            <iframe id="code_result_viewer" style="width:95%; height:70%" src="" />
+            <iframe id="code_result_viewer" style="width:95%; height:80%" scrolling="yes"  src=""></iframe>
 
         </div>
     </div>
     <!--injection script-->
-    <script>
-        document.getElementById("childstyles").addEventListener("change", readFileAsString)
-        function readFileAsString() {
-            f=document.getElementById('childstyles')
-            var files = f.files;
-            if (files.length === 0) {
-                console.log('No file is selected');
-                return;
-            }
     
-            var reader = new FileReader();
-            
-            reader.onload = function() {
-                console.log(reader.result) 
-                var  outp= reader.result;
-                var fin=document.getElementById('childstyles2');
-                fin.value=outp;
-            };
-            reader.readAsText(files[0]);
-            console.log(reader)
-            console.log(reader.result)
-            
-        }
-    </script>
 </body>
 
 </html>

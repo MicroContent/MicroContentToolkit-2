@@ -17,11 +17,29 @@
             url: 'http://localhost:8080/',
             allowStyleInjection: true,
         }); 
+
+        connection.receive(function(data) {
+            switch(data.type) {
+                case 'setContent':
+                    if (data.hasOwnProperty('title')) {
+                        document.getElementById('title').innerHTML = data.title;
+                    }
+                    if (data.hasOwnProperty('question')) {
+                        document.getElementById('question').innerHTML = data.question;
+                    }
+                    console.log(data.title,data.question)
+                    break;
+            }
+            });
     </script>
     <!-- <script>
         document.getElementById("question").innerText="hyolo"
     </script> -->
+    <h1>Viewer</h1>
+    <p id="title"></p>
     <p id="question"></p>
+    
+
 </body>
 
 </html>

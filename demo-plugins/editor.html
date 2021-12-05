@@ -2,13 +2,37 @@
 <head>
     <meta charset="UTF-8">
     <title>PoolSelectionEditor</title>
-
+    <script src='http://localhost:8080/node_modules/seamless/build/seamless.child.min.js'></script>
     
 </head>
 <body>
+    <script type="text/javascript">
+        
+        // Connect to the parent page.
+        var parent = window.seamless.connect({
+            url: 'http://localhost:8080/',
+            allowStyleInjection: true,
+        }); 
+        // Send a message
+
+        window.sendToParent = function(event) {
+                event.preventDefault();
+                parent.send({
+                    type: 'toViewer',
+                    title: document.getElementById('title').value,
+                    question : document.getElementById('question').value
+                    });
+                };
+
+    
+
+    </script>
     <label for ="title">Enter title:</label>
-    <input id="title">
+    <input type="text" id="title" value="">
     <label for="question">Enter a question:</label>
-    <input id="question">
+    <input type="text" id="question" value="">
+    <button type="button" style="width: auto;" onclick="sendToParent(event)">Send to toolkit</button>
+    <!-- <a href="#" id="sendtext" onclick="sendToParent(event)" class="button postfix">Send info to parent</a> -->
+
 </body>
 </html>
