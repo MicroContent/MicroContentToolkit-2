@@ -21,14 +21,19 @@
         connection.receive(function(data) {
             switch(data.type) {
                 case 'setContent':
-                    if (data.hasOwnProperty('title')) {
-                        document.getElementById('title').innerHTML = data.title;
-                    }
-                    if (data.hasOwnProperty('question')) {
-                        document.getElementById('question').innerHTML = data.question;
-                    }
-                    console.log(data.title,data.question)
-                    break;
+                    console.log("from tk",data.main[0][2])
+                    for (var i = 1; i < data.main[0].length+1; i++){
+                        
+                        if (data.main[0][i][0]==('title')) {
+                            document.getElementById('title').innerHTML = data.main[0][i][1];
+                        }
+                        else if (data.main[0][i][0]==('question')) {
+                            document.getElementById('question').innerHTML = data.main[0][i][1];
+                        }
+                        
+                        
+                    } 
+                    break;     
             }
             });
     </script>

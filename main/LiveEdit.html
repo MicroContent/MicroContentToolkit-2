@@ -39,8 +39,9 @@
         }
     </style>
     <script type="text/javascript">
-        var titleV;
-        var questionV;
+        var editorKeys;
+        var editorValues;
+        var editorObject;
         // window.onload = function() {
         //     var child1 = document.getElementById('code_result_viewer');
         //     var child2 = document.getElementById('code_result_editor');
@@ -88,31 +89,30 @@
             child2.receive(function(data) {
                 switch(data.type) {
                     case 'toViewer':
-                    if (data.hasOwnProperty('title')) {
-                        titleV = data.title;
-                    }
-                    if (data.hasOwnProperty('question')) {
-                        questionV= data.question;
-                    }
-                    console.log("got: ",titleV,questionV)
-                    break;
-                }
-            });
-        };
-
+                    editorKeys=Object.keys(data).slice(0,Object.entries(data).length-1);
+                    editorValues=Object.values(data).slice(0,Object.entries(data).length-1);
+                    editorObject=editorKeys.map(function(e, i) {
+                        return [e, editorValues[i]];
+                    });
+                    };
+                    console.log("got: ",Object.values(data).slice(0,Object.entries(data).length-1),Object.keys(data).slice(0,Object.entries(data).length-1))
+                    
+                });
+            };  
+        // document.getElementById("chload").addEventListener("click",child1load)
         function child1load(){
             var child1 = document.getElementById('code_result_viewer');
             window.seamless(child1);
             window.sendToChild = function(event) {
                 event.preventDefault();
-                console.log("send:",titleV,questionV)
-                child1.send({
-                    type: 'setContent',
-                    title: titleV,
-                    question: questionV
-                    });
-                };
-
+                    child1.send({
+                        type: 'setContent',
+                        main: [editorObject]
+                                
+                });
+                console.log("sending",editorObject)
+            };
+        
             window.injectStyles = function(event) {
             
                 event.preventDefault();
@@ -121,7 +121,14 @@
                         data: [document.getElementById('childstyles2').value]
                     });
                 };
-            };
+        };
+        
+        
+
+        function loadData(){
+            var dataout = document.getElementById("datatoviewer")
+            
+        };
 
     </script>
 
@@ -185,7 +192,7 @@
                         if (files.length === 0) {
                             console.log('No file is selected');
                             return;
-                        }
+                        };
                 
                         var reader = new FileReader();
                         
@@ -196,10 +203,8 @@
                             fin.value=outp;
                         };
                         reader.readAsText(files[0]);
-                        console.log(reader)
-                        console.log(reader.result)
                         
-                    }
+                    };
                 </script>
 
             </div>
@@ -262,6 +267,9 @@
 
         </div>
 
+
+
+
         <div class="Data" id='data' style="border: 1px rgb(0, 17, 255) solid; margin: 0.5%; overflow: scroll">
             <div class="panel-heading">
                 <h2>Data</h2>
@@ -270,14 +278,18 @@
                 <!-- <a href="#" id="sendToChild" onclick="sendToChild(event)" class="button postfix">Load Data from Editor</a> -->
             </div>
             <div class="panel-body">
-                <textarea id="data-input" style="width: 80%; min-height: 150px"></textarea>
+                <!-- <p id="datatoviewer"></p> -->
+                <textarea id="datatoviewer" style="width: 80%; min-height: 150px"></textarea>
             </div>
         </div>
+
+
+
 
         <div class="Viewer" id='viewer' style=" border: 1px rgb(0, 17, 255) solid; margin: 0.5%; overflow: scroll" >
             <div class="panel-heading">
                 <h2>Viewer</h2>
-                <button  class="btn btn-raised btn-info" onclick="reloadViewer(); child1load()">Reload Viewer</button>
+                <button id='chload' class="btn btn-raised btn-info" onclick="reloadViewer(); child1load()">Reload Viewer</button>
             </div>
             <div class="panel-body" id="viewer_container"></div>
             <br>
