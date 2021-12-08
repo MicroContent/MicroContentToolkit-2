@@ -5,6 +5,15 @@ The purpose of the project was to build a plugin system/toolkit to help develope
 
 Main repository of the project
 
+<h1>Definitions-Main parts</h1>
+<ul>
+  <li> Toolkit: The main part of the plugin system. It does most of the jobs and connects all the other parts</li>
+  <li> Live editors: One for the viewer and one for the editor plugin. They are part of the toolkit as codemirror textfields</li>
+  <li> Editor iframe: hosted by node; inside a seamless iframe that is running an editor plugin html file</li>
+  <li> Viewer iframe: hosted by node; inside a seamless iframe that is running a viewer plugin html file</li>
+  <li> Data section: Visually represents the data that is being sent from viewer to editor in a user friendly way</li>
+</ul>
+
 Used libraries:<br>
   For the live code editor: https://codemirror.net/  ; https://github.com/codemirror/CodeMirror/blob/master/LICENSE<br>
   For the inheritance and message sending: https://www.npmjs.com/package/seamless   ; https://github.com/travist/seamless.js/blob/master/LICENSE.txt<br>
@@ -15,8 +24,6 @@ Source Code for testing:
   <br>
 
 <h1>How to use</h1>
-
-<br>
 <h2>Start & Run the Server</h2>
 <ol>
   <li> <code>cd</code> to the <code>Primary-rep</code>-Folder with a Terminal or Powershell</li>
@@ -28,4 +35,8 @@ Source Code for testing:
 <p> You should then see the successfully loaded Content Plugin System.</p>
 
 <br>
-<h2></h2>
+<h2>Setup</h2>
+<ol>
+  <li> </li>
+  
+</ol>
