@@ -88,7 +88,6 @@ Source Code for testing:
   
   <li> The toolkit can receive and handle any number of data</li>
   <li> The viewer needs a seamless function to receive this information. Here the receiving differs from typical seamless. The use needs to handle the data as <cd>data.main[0]</cd>. This is an array of arrays that if you loop through can get the desired information.</li>
-  <p> For more information visit the seamless documentation.</p>
-  https://github.com/travist/seamless.js#readme
+  <p> For more information visit the seamless documentation: https://github.com/travist/seamless.js#readme</p>
   <p> For an example for our system see the example plugins and test them with the system.</p>
 </ul>
