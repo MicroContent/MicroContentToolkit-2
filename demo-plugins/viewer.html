@@ -1,11 +1,9 @@
-
+<!-- this is a test plugin; not part of toolkit -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>PoolSelectionViewer</title>
-   
-    
-    
+    <!-- link the seamless js from under the host folders -->
     <script src='http://localhost:8080/node_modules/seamless/build/seamless.child.min.js'></script>
 </head>
 
@@ -18,12 +16,13 @@
             allowStyleInjection: true,
         }); 
 
+        // get data from the parent and undirectly from editor
         connection.receive(function(data) {
             switch(data.type) {
                 case 'setContent':
-                    console.log("from tk",data.main[0][2])
+                    // parent for varying type of input sends data as special object; data.main[0] is the array of arrays with your message inside
                     for (var i = 1; i < data.main[0].length+1; i++){
-                        
+                        // fill your viewer content with the recieved things
                         if (data.main[0][i][0]==('title')) {
                             document.getElementById('title').innerHTML = data.main[0][i][1];
                         }
@@ -37,9 +36,7 @@
             }
             });
     </script>
-    <!-- <script>
-        document.getElementById("question").innerText="hyolo"
-    </script> -->
+
     <h1>Viewer</h1>
     <p id="title"></p>
     <p id="question"></p>
