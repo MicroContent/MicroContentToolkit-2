@@ -61,7 +61,7 @@ Source Code for testing:
 <script src='http://localhost:8080/node_modules/seamless/build/seamless.child.min.js'></script>
 ```
   
-  <li> user needs to estabilish a connection between parents and children. Include this code in beginning of the body</li>
+  <li> User needs to estabilish a connection between parents and children. Include this code in beginning of the body</li>
   
   ```
   var parent = window.seamless.connect({
@@ -69,5 +69,24 @@ Source Code for testing:
             allowStyleInjection: true,
         }); 
   ```
-  
+  <li> The editor needs a seamless function to send data to the toolkit. This infomation can be sent according to the seamless documentaion</li>
+  <p> Sending a title input and question input. More detailed code in demo-plugins folder</p>
+  ```
+  // Send a message
+        window.sendToParent = function(event) {
+                event.preventDefault();
+                parent.send({
+                    // type helps the parent recognise message type
+                    type: 'toViewer',
+                    // data you send to viewer
+                    title: document.getElementById('title').value,
+                    question : document.getElementById('question').value
+                    });
+                };
+  ```
+  <li> The toolkit can receive and handle any number of data</li>
+  <li> The viewer needs a seamless function to receive this information. Here the receiving differs from typical seamless. The use needs to handle the data as <cd>data.main[0]</cd>. This is an array of arrays that if you loop through can get the desired information.</li>
+  <p> For more information visit the seamless documentation.</p>
+  https://github.com/travist/seamless.js#readme
+  <p> For an example for our system see the example plugins and test them with the system.</p>
 </ul>
