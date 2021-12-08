@@ -143,10 +143,10 @@ Source Code for testing:
     <li> </li>
 </ul>
 
-<h1>Testing</h1>
-<p>Paragraph<p>
+<h1>Testing with Jest</h1>
+<p>To set it up:<p>
 <ol>
-  <li>You need to go to the testing folder 'test'</li>
+  <li>You need to go to the testing folder <code>'test'</code></li>
   <li>Open the terminal and type the following command: <code>npm init</code> to install json folder inside</li>
   <li>Then type: <code>install --save-dev jest</code> -> now you shall see json folder <code>package-lock.json</code> inside</li>
   <li>Open <code>package.json</code> and change <code>"test":"test"</code> to <code>"test":"jest"</code></li>
