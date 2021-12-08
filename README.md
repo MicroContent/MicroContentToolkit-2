@@ -39,7 +39,6 @@ Source Code for testing:
 </ol>
 <p> The user is also able to download the edited codes</p>
 <p><b>To use the toolkit copy the directory to your computer</b></p>
-<em><>
 <br>
 <h2>Start & Run the Server</h2>
 <ol>
