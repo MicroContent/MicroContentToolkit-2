@@ -11,7 +11,7 @@ Main repository of the project
   <li> Live editors: One for the viewer and one for the editor plugin. They are part of the toolkit as codemirror textfields</li>
   <li> Editor iframe: hosted by node; inside a seamless iframe that is running an editor plugin html file</li>
   <li> Viewer iframe: hosted by node; inside a seamless iframe that is running a viewer plugin html file</li>
-  <li> Data section: Visually represents the data that is being sent from viewer to editor in a user friendly way</li>
+  <li> DATA section: Visually represents the data that is being sent from viewer to editor in a user friendly way</li>
 </ul>
 
 Used libraries:<br>
@@ -29,8 +29,13 @@ Source Code for testing:
   <li> The user opens a plugin for the editor. They can do this via a link <code>Src-Code into Editor Section</code> or just by opening a local file <code>choose a file</code></li>
   <li> After entering the link or selecting a file, the user needs to load the code to the live editor with the respective buttons <code>Load Editor-Codemirror</code> <code>Load the first editor</code></li>
   <li> On the fly adjustments can be made in the live editor, saving time reopening files after every modification</li>
-  <li> Next, the editor iframe can be loaded with the <code>Reload editor</code> button </li>
-  <li> Data section: Visually represents the data that is being sent from viewer to editor in a user friendly way</li>
+  <li> Next, the editor iframe can be loaded with the <code>Reload editor</code> button. </li>
+  <li> Then, the user has to do the same process with the viewer plugin with the buttons found under the <code>Viewer</code> label.</li>
+  <li> Depending on the type of plugin the user needs to input some data into the editor section</li>
+  <li> With the button inside the iframe, the data is sent to the toolkit and being shown in the DATA section.</li>
+  <li> In the DATA section using the <code>Send data to viewer</code> button, we send the data from the toolkit to the viewer iframe</li>
+  <li> Also depending of the viewer plugin implementation, the data is shown accordingly.</li>
+  <li> Finally, we can upload a stylesheet to match the look of the website where the plugin is developed to. After the file is uploaded, its content is shown in a placeholder text field. Next to that field with pushing the <code>Submit</code> button the style is injected.</li>
 </ol>
 <br>
 <h2>Start & Run the Server</h2>
