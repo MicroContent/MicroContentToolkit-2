@@ -117,14 +117,17 @@ Source Code for testing:
 </ul>
 
 <h1>Components</h1>
-<h2>Liveedit.html</h2>
+<h2>LiveEdit.html</h2>
 <p> Basically the main part of the whole toolkit. It contains the html of the toolkit and some functions for seamless and codemirror.</p>
 <h3>Functions</h3>
 <ul>
   <li><b>child2load: </b> This function is called when the reload editor is clicked. Transforms the iframe into seamless, but also contains another subroutine, handling the receiving of the data from the editor: Since the number of inputs depends on the editor, it handles the data as an object.</li>
   <li><b>child1load:</b> It is called when reloading the viewer iframe. Transforms the iframe into seamless, and a subfunction handles the data sending to the viewer. This function is called when the user clicked send data to viewer. The type of data is setContent; the viewer has to handle the message accordingly. The data can be accessed with data.main[0] as an array of arrays-(contentType:content); The other subfunction is a similar sending protocol but with different type because it is used for injection.</li>
-  <li></li>
-  
-  
-
+  <li><b>loadData: </b> displays a user friendly representation of the sent data</li>
+  <li><b>readFileAsString: </b> This function is placed outside the script file and immidiately after the button that triggers it. It reads the css file that is to be injected to the viewer. After reading it places it into a placeholder text field.</li>
+  <li><b>Codemirror.fromTextAre: </b> is called in two places. This tranforms the simple textares to codemorror editors and sets the basic settings like autocorrection. The functionality of the codemirror parts is expandable.</li>
+  <li><b>loadData: </b> displays a user friendly representation of the sent data</li>
 </ul>
+<h2>script.js</h2>
+<p> Contains the scripts that are not strictly seamless related, more like server and buttonclicks.</p>
+<h3>Functions</h3>
