@@ -24,6 +24,15 @@ Source Code for testing:
   <br>
 
 <h1>How to use</h1>
+<h2>Usage</h2>
+<ol>
+  <li> The user opens a plugin for the editor. They can do this via a link <code>Src-Code into Editor Section</code> or just by opening a local file <code>choose a file</code></li>
+  <li> After entering the link or selecting a file, the user needs to load the code to the live editor with the respective buttons <code>Load Editor-Codemirror</code> <code>Load the first editor</code></li>
+  <li> On the fly adjustments can be made in the live editor, saving time reopening files after every modification</li>
+  <li> Next, the editor iframe can be loaded with the <code>Reload editor</code> button </li>
+  <li> Data section: Visually represents the data that is being sent from viewer to editor in a user friendly way</li>
+</ol>
+<br>
 <h2>Start & Run the Server</h2>
 <ol>
   <li> <code>cd</code> to the <code>Primary-rep</code>-Folder with a Terminal or Powershell</li>
