@@ -37,6 +37,7 @@ Source Code for testing:
   <li> Also depending of the viewer plugin implementation, the data is shown accordingly.</li>
   <li> Finally, we can upload a stylesheet to match the look of the website where the plugin is developed to. After the file is uploaded, its content is shown in a placeholder text field. Next to that field with pushing the <code>Submit</code> button the style is injected.</li>
 </ol>
+<p> The user is also able to download the edited codes</p>
 <br>
 <h2>Start & Run the Server</h2>
 <ol>
@@ -49,8 +50,17 @@ Source Code for testing:
 <p> You should then see the successfully loaded Content Plugin System.</p>
 
 <br>
-<h2>Setup</h2>
-<ol>
-  <li> </li>
+<h2>Setup your plugins</h2>
+<p> The plugin consists of two parts. The editor and viewer, both a separate html file.</p><br>
+<p> Editor-Viewer communication is being done through the toolkit with help of a server.</p><br>
+<p> Therefor there are some adjustments the plugin developers need to make for the toolkit to work</p><br>
+<ul>
+  <li> Linking the seamless library from the toolkit libraries. Include this script in both plugin headers</li>
+  '''<script src='http://localhost:8080/node_modules/seamless/build/seamless.child.min.js'></script>'''
+  <li> user needs to estabilish a connection between parents and children. Include this code in beginning of the body</li>
+  '''var parent = window.seamless.connect({
+            url: 'http://localhost:8080/',
+            allowStyleInjection: true,
+        }); '''
   
-</ol>
+</ul>
