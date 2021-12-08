@@ -1,5 +1,5 @@
 Table of Contents:
-# Short Description:
+[Short Description:]Short Description:
 # Definitions-Main parts
 # Used libraries:
 ###
