@@ -1,7 +1,7 @@
 Table of Contents:
-### Short Description:
-### Definitions-Main parts
-### Used libraries:
+# Short Description:
+# Definitions-Main parts
+# Used libraries:
 ###
 ###
 <h1>Plugin System Toolkit</h1>
