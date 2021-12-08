@@ -131,3 +131,14 @@ Source Code for testing:
 <h2>script.js</h2>
 <p> Contains the scripts that are not strictly seamless related, more like server and buttonclicks.</p>
 <h3>Functions</h3>
+<ul>
+  <li> </li>
+</ul>
+
+<h2>server.js</h2>
+<p>Contains </p>
+<h3>Functions</h3>
+<ul>
+  <li><b>loadFileAsText: </b></li>
+  <li><b>saveTextAsFile: </b> This function is called when the respective button is clicked. Saves the editot or viewer plugins after the user edited it in the live editors</li>
+</ul>
