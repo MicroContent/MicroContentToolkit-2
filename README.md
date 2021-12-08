@@ -88,6 +88,29 @@ Source Code for testing:
   
   <li> The toolkit can receive and handle any number of data</li>
   <li> The viewer needs a seamless function to receive this information. Here the receiving differs from typical seamless. The use needs to handle the data as <cd>data.main[0]</cd>. This is an array of arrays that if you loop through can get the desired information.</li>
+  
+  ```
+  connection.receive(function(data) {
+            switch(data.type) {
+                case 'setContent':
+                    // parent for varying type of input sends data as special object; data.main[0] is the array of arrays with your message inside
+                    for (var i = 1; i < data.main[0].length+1; i++){
+                        // fill your viewer content with the recieved things
+                        if (data.main[0][i][0]==('title')) {
+                            // gets the input from the title
+                            document.getElementById('title').innerHTML = data.main[0][i][1];
+                        }
+                        else if (data.main[0][i][0]==('question')) {
+                            document.getElementById('question').innerHTML = data.main[0][i][1];
+                        }
+                        
+                        
+                    } 
+                    break;     
+            }
+            });
+  ```
+  
   <p> For more information visit the seamless documentation: https://github.com/travist/seamless.js#readme</p>
   <p> For an example for our system see the example plugins and test them with the system.</p>
 </ul>
