@@ -1,5 +1,5 @@
 Table of Contents:
--[Short Description:](Short Description:)
+-[Short Description:](#short-description)
 
 <h1>Plugin System Toolkit</h1>
 <h3>Short Description:</h3>
