@@ -142,3 +142,20 @@ Source Code for testing:
 <ul>
     <li> </li>
 </ul>
+
+<h1>Testing</h1>
+<p>Paragraph<p>
+<ol>
+  <li>You need to go to the testing folder 'test'</li>
+  <li>Open the terminal and type the following command: <code>npm init</code> to install json folder inside</li>
+  <li>Then type: <code>install --save-dev jest</code> -> now you shall see json folder <code>package-lock.json</code> inside</li>
+  <li>Open <code>package.json</code> and change <code>"test":"test"</code> to <code>"test":"jest"</code></li>
+  <li>Finally, to test the code, type in the terminal: <code>npm test</code> and it should run properly</li>
+</ol>
+<h3>Optional:</h3>
+<p>If you want to keep track of all the functions, branches and line of execution and testing, you can:</p>
+<ol>
+  <li>Open once again <code>package.json</code> file</li>
+  <li>Insted of writing <code>"test":"jest"</code>, you have to write <code>"test":"jest --coverage"</code></li>
+<ol>
+<p>Thus, when testing the code with <code>npm test</code>, you can now see a table with details about all the functions being tested. If you need more details and visualisations, you can go to the folder <code>coverage</code>. Then you open folder <code>lcov-report</code> and there you can see a file called <code>index.html</code>. When opening it in the browser, you can have a deeper look at the functions and when clicking on the testing file, you can see them visualised in code and whether a mistake is made.</p>
