@@ -157,5 +157,5 @@ Source Code for testing:
 <ol>
   <li>Open once again <code>package.json</code> file</li>
   <li>Insted of writing <code>"test":"jest"</code>, you have to write <code>"test":"jest --coverage"</code></li>
-<ol>
+</ol>
 <p>Thus, when testing the code with <code>npm test</code>, you can now see a table with details about all the functions being tested. If you need more details and visualisations, you can go to the folder <code>coverage</code>. Then you open folder <code>lcov-report</code> and there you can see a file called <code>index.html</code>. When opening it in the browser, you can have a deeper look at the functions and when clicking on the testing file, you can see them visualised in code and whether a mistake is made.</p>
