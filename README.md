@@ -164,7 +164,7 @@ Used libraries:<br>
 <ul>
   <li><b>8081</b>: The server with this port will send the HTML without the JS and CSS because <a href="https://www.section.io/engineering-education/how-to-use-cors-in-nodejs-with-express/">CORS</a> is being restricted</li><br>
    <li><b>8080</b>: The server with this port will send the HTML including JS and CSS because CORS is implemented, some <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types">mimeTypes</a> are supported on this port and the response is more advanced and improved to even include JS and CSS</li><br>
-  <li><b>9010</b>: Through this port the editor code from the first CodeMirror will arrive here. After extracting the data out of request, the URL to the port 9011 will be sent to the client.</li><br>
+  <li><b>9010</b>: Through this port the editor code from the first CodeMirror will arrive here. After extracting the data out of the request, the URL to the port 9011 will be sent to the client.</li><br>
   <li><b>9011</b>: Through this port the data from the previous request on port 9010 will be displayed on the editor iframe</li><br>
   <li><b>9012</b>: Through this port the viewer code from the second CodeMirror will arrive here. After extracting the data out of the request, the URL to the port 9013 will be sent to the client.</li><br>
   <li><b>9013</b>: Through this port the data from the previous request on port 9013 will be displayed on the viewer iframe</li><br>
