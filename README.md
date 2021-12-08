@@ -30,8 +30,6 @@ Used libraries:<br>
   For the server: https://nodejs.org/en/<br>
   
   <br><br>
-Source Code for testing:
-  <br>
 
 <h1>How to use</h1>
 <h2>Usage</h2>
