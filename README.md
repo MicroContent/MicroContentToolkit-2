@@ -71,7 +71,8 @@ Source Code for testing:
   ```
   <li> The editor needs a seamless function to send data to the toolkit. This infomation can be sent according to the seamless documentaion</li>
   <p> Sending a title input and question input. More detailed code in demo-plugins folder</p>
-  ```
+  
+```
   // Send a message
         window.sendToParent = function(event) {
                 event.preventDefault();
@@ -83,7 +84,8 @@ Source Code for testing:
                     question : document.getElementById('question').value
                     });
                 };
-  ```
+```
+  
   <li> The toolkit can receive and handle any number of data</li>
   <li> The viewer needs a seamless function to receive this information. Here the receiving differs from typical seamless. The use needs to handle the data as <cd>data.main[0]</cd>. This is an array of arrays that if you loop through can get the desired information.</li>
   <p> For more information visit the seamless documentation.</p>
