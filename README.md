@@ -56,11 +56,15 @@ Source Code for testing:
 <p> Therefor there are some adjustments the plugin developers need to make for the toolkit to work</p>
 <ul>
   <li> Linking the seamless library from the toolkit libraries. Include this script in both plugin headers</li>
-  ```<script src='http://localhost:8080/node_modules/seamless/build/seamless.child.min.js'></script>```
+  ```
+  <script src='http://localhost:8080/node_modules/seamless/build/seamless.child.min.js'></script>
+  ```
   <li> user needs to estabilish a connection between parents and children. Include this code in beginning of the body</li>
-  ```var parent = window.seamless.connect({
+  ```
+  var parent = window.seamless.connect({
             url: 'http://localhost:8080/',
             allowStyleInjection: true,
-        }); ```
+        }); 
+  ```
   
 </ul>
