@@ -1,4 +1,4 @@
-<h2>Table of Contents:</h2><br>
+Table of Contents:<br>
 -[Short Description:](#short-description)<br>
 -[Definitions-Main parts](#definitions-main-parts)<br>
 -[How to use](#how-to-use)<br>
