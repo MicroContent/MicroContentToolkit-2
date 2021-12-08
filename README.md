@@ -14,6 +14,8 @@ Used libraries:<br>
 Source Code for testing:
   <br>
 
+<h1>How to use</h1>
+
 <br>
 <h2>Start & Run the Server</h2>
 <ol>
@@ -25,3 +27,5 @@ Source Code for testing:
 </ol>
 <p> You should then see the successfully loaded Content Plugin System.</p>
 
+<br>
+<h2></h2>
