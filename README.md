@@ -6,19 +6,14 @@ The purpose of the project was to build a plugin system/toolkit to help develope
 Main repository of the project
 
 Used libraries:<br>
-  For the live code editor: https://codemirror.net/<br>
-  For the inheritance: https://www.npmjs.com/package/seamless<br>
+  For the live code editor: https://codemirror.net/  ; https://github.com/codemirror/CodeMirror/blob/master/LICENSE<br>
+  For the inheritance and message sending: https://www.npmjs.com/package/seamless   ; https://github.com/travist/seamless.js/blob/master/LICENSE.txt<br>
+  For the server: https://nodejs.org/en/<br>
   
-Dependencies:<br>
-  To use seamless you need to have a seamless folder inside the root directory and have seamless installed in there. (run: npm i seamless in cmd)
   <br><br>
-  Source Code for testing:
+Source Code for testing:
   <br>
-  Raw URL-Src-Code for Editor and Viewer:
-  https://github.com/MicroContent/MicroContent.github.io/blob/master/MicroContentList.json
-  <br>
-  
-  <br>
+
 <br>
 <h2>Start & Run the Server</h2>
 <ol>
