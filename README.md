@@ -1,5 +1,9 @@
-# Plugin System Toolkit
-# Definitions-Main parts
+Table of Contents:
+### Short Description:
+### Definitions-Main parts
+### Used libraries:
+###
+###
 <h1>Plugin System Toolkit</h1>
 <h3>Short Description:</h3>
 The purpose of the project was to build a plugin system/toolkit to help developers create new plugins in the proper form and test them before the real hosting, in addition to produce a hosting application for plugins. It also can help the host application operators to test foreign plug-ins and implement them into their working webpages.<br>
