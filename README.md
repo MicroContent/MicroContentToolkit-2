@@ -1,13 +1,4 @@
-Table of Contents:<br>
--[Short Description:](#short-description)<br>
--[Definitions-Main parts](#definitions-main-parts)<br>
--[How to use](#how-to-use)<br>
--[Usage](#usage)<br>
--[Start and Run the Server](#start-and-run-the-server)<br>
--[Setup your plugins](#setup-your-plugins)<br>
--[Components](#components)<br>
--[Testing with Jest](#testing-with-jest)<br>
-
+# Primary-repo
 <h1>Plugin System Toolkit</h1>
 <h3>Short Description:</h3>
 The purpose of the project was to build a plugin system/toolkit to help developers create new plugins in the proper form and test them before the real hosting, in addition to produce a hosting application for plugins. It also can help the host application operators to test foreign plug-ins and implement them into their working webpages.<br>
@@ -49,7 +40,7 @@ Source Code for testing:
 <p> The user is also able to download the edited codes</p>
 <p><b>To use the toolkit copy the directory to your computer</b></p>
 <br>
-<h2>Start and Run the Server</h2>
+<h2>Start & Run the Server</h2>
 <ol>
   <li> <code>cd</code> to the <code>Primary-rep</code>-Folder with a Terminal or Powershell</li>
   <li> Check if the <code>server.js</code> and <code>package.json</code> are inside the <code>Primary-rep</code>-Folder </li>
@@ -138,18 +129,37 @@ Source Code for testing:
   <li><b>loadData: </b> displays a user friendly representation of the sent data</li>
 </ul>
 <h2>script.js</h2>
-<p> Contains the scripts that are not strictly seamless related, more like server and buttonclicks.</p>
+<p> Contains the main JS script that is not strictly seamless related, but more related with the server and all the buttonclicks. All important user-defined JavaScript functions will be exectued inside this file.</p>
 <h3>Functions</h3>
 <ul>
-  <li><b>loadFileAsText: </b></li>
-  <li><b>saveTextAsFile: </b> This function is called when the respective button is clicked. Saves the editot or viewer plugins after the user edited it in the live editors</li>
-</ul>
+  <li><b>loadFileAsText:</b> This function is called when the 'Load the first editor'-button is clicked after uploading the editor plugin file. This function will read the plugin file. The function will extract the full complete content out of the file and then the extracted code will be placed into the first CodeMirror.</li><br>
+  
+  <li><b>loadFileAsText2:</b> This function is very similar to the <b>loadFIleAsText</b> function. But this function will read the viewer file and then the extracted code will be placed into the second CodeMirror instead of the first CodeMirror.</li><br>
+  <li><b>saveTextAsFile: </b> This function is called when the respective button is clicked. Saves the editor plugin after the user edited the code in the first live editor (1st CodeMirror).</li><br>
 
+ <li><b>saveTextAsFile2: </b> This function is very similar to the <b>saveTextAsFile</b>. But this one saves the viewer code from the second live editor (2nd CodeMirror).</li><br>
+ 
+ <li><b>getSrcintoEditor:</b> This function is called when a URL to any public raw plugin code is placed into the input bar and the respective button is clicked. Then the process is also similar to the <b>loadFileAsText</b>. This function will read the public raw plugin code. The function will extract the full complete content out of the URL and then the extracted code will be placed into the first CodeMirror.</li><br>
+  
+ <li><b>getSrcintoViewer: </b> This function is very similar to the <b>getSrcintoEditor</b>. But this function will read the public raw plugin code for the viewer part and the extracted code will be placed into the second CodeMirror.</li><br>
+ 
+  <li><b>reloadEditor: </b> This function is called when the respective button is clicked. This function will ouput the code from the first CodeMirror into the editor iframe through a network connection with the node.js server. The connection will be carried out through the localhost network.</li><br>
+  
+  <li><b>reloadEditor: </b> This function is very similar to the <b>reloadEditor</b>. This function will ouput the code from the second CodeMirror into the editor iframe through a network connection with the node.js server. The connection to the server is realized through ports of the server which are different from the ports of the network connection carried out by the <b>reloadEditor</b>.</li><br>
+
+</ul>
+ 
+ 
 <h2>server.js</h2>
-<p>Contains </p>
-<h3>Functions</h3>
+<p>Contains the ports from which the server is listening to. The node.js file is the server which is responsible for handling the connection with the client and different requests from the client.</p>
+<h3>Server with different ports:</h3>
 <ul>
-    <li> </li>
+  <li><b>8081</b>: The server with this port will send the HTML without the JS and CSS because the <a href="https://www.section.io/engineering-education/how-to-use-cors-in-nodejs-with-express/">CORS</a> is being restricted</li><br>
+   <li><b>8080</b>: The server with this port will send the HTML including JS and CSS because CORS is implemented, some <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types">mimeTypes</a> are supported on this port and the response is more advanced and improved to even include JS and CSS</li><br>
+  <li><b>9010</b>: Through this port the editor code from the first CodeMirror will arrive here. After extracting the data out of request, the URL to the port 9011 will be sent to the client.</li><br>
+  <li><b>9011</b>: Through this port the data from the previous request on port 9010 will be displayed on the editor iframe</li><br>
+  <li><b>9012</b>: Through this port the viewer code from the second CodeMirror will arrive here. After extracting the data out of the request, the URL to the port 9013 will be sent to the client.</li><br>
+  <li><b>9013</b>: Through this port the data from the previous request on port 9013 will be displayed on the viewer iframe</li><br>
 </ul>
 
 <h1>Testing with Jest</h1>
