@@ -11,7 +11,7 @@ Main repository of the project
   <li> Live editors: One for the viewer and one for the editor plugin. They are part of the toolkit as codemirror textfields</li>
   <li> Editor iframe: hosted by node; inside a seamless iframe that is running an editor plugin html file</li>
   <li> Viewer iframe: hosted by node; inside a seamless iframe that is running a viewer plugin html file</li>
-  <li> DATA section: Visually represents the data that is being sent from viewer to editor in a user friendly way</li>
+  <li> DATA section: Visually represents the data in a user friendly way that is being sent from viewer to editor </li>
 </ul>
 
 Used libraries:<br>
@@ -38,6 +38,8 @@ Source Code for testing:
   <li> Finally, we can upload a stylesheet to match the look of the website where the plugin is developed to. After the file is uploaded, its content is shown in a placeholder text field. Next to that field with pushing the <code>Submit</code> button the style is injected.</li>
 </ol>
 <p> The user is also able to download the edited codes</p>
+<p><b>To use the toolkit copy the directory to your computer</b></p>
+<em><>
 <br>
 <h2>Start & Run the Server</h2>
 <ol>
@@ -113,4 +115,17 @@ Source Code for testing:
   
   <p> For more information visit the seamless documentation: https://github.com/travist/seamless.js#readme</p>
   <p> For an example for our system see the example plugins and test them with the system.</p>
+</ul>
+
+<h1>Components</h1>
+<h2>Liveedit.html</h2>
+<p> Basically the main part of the whole toolkit. It contains the html of the toolkit and some functions for seamless and codemirror.</p>
+<h3>Functions</h3>
+<ul>
+  <li><b>child2load: </b> This function is called when the reload editor is clicked. Transforms the iframe into seamless, but also contains another subroutine, handling the receiving of the data from the editor: Since the number of inputs depends on the editor, it handles the data as an object.</li>
+  <li><b>child1load:</b> It is called when reloading the viewer iframe. Transforms the iframe into seamless, and a subfunction handles the data sending to the viewer. This function is called when the user clicked send data to viewer. The type of data is setContent; the viewer has to handle the message accordingly. The data can be accessed with data.main[0] as an array of arrays-(contentType:content); The other subfunction is a similar sending protocol but with different type because it is used for injection.</li>
+  <li></li>
+  
+  
+
 </ul>
