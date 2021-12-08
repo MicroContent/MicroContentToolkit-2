@@ -1,5 +1,9 @@
 # Primary-repo
 <h1>Plugin System Toolkit</h1>
+<h3>Short Description:</h3>
+The purpose of the project was to build a system/toolkit to help developers create and test new 
+plugins, in addition produce a hosting application for plugins.
+
 Main repository of the project
 
 Used libraries:<br>
