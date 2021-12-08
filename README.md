@@ -1,6 +1,12 @@
 Table of Contents:<br>
--[Short Description:](#short-description)
--[Short Description:](#short-description)
+-[Short Description:](#short-description)<br>
+-[Definitions-Main parts](#definitions-main-parts)<br>
+-[How to use](#how-to-use)<br>
+-[Usage](#usage)<br>
+-[Start & Run the Server](#start-&-run-the-server)<br>
+-[Setup your plugins](#setup-your-plugins)<br>
+-[Components](#components)<br>
+-[Testing with Jest](#testing-with-jest)<br>
 
 <h1>Plugin System Toolkit</h1>
 <h3>Short Description:</h3>
