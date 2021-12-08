@@ -3,7 +3,7 @@ Table of Contents:<br>
 -[Definitions-Main parts](#definitions-main-parts)<br>
 -[How to use](#how-to-use)<br>
 -[Usage](#usage)<br>
--[Start & Run the Server](#start-&-run-the-server)<br>
+-[Start and Run the Server](#start-and-run-the-server)<br>
 -[Setup your plugins](#setup-your-plugins)<br>
 -[Components](#components)<br>
 -[Testing with Jest](#testing-with-jest)<br>
@@ -49,7 +49,7 @@ Source Code for testing:
 <p> The user is also able to download the edited codes</p>
 <p><b>To use the toolkit copy the directory to your computer</b></p>
 <br>
-<h2>Start & Run the Server</h2>
+<h2>Start and Run the Server</h2>
 <ol>
   <li> <code>cd</code> to the <code>Primary-rep</code>-Folder with a Terminal or Powershell</li>
   <li> Check if the <code>server.js</code> and <code>package.json</code> are inside the <code>Primary-rep</code>-Folder </li>
