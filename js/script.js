@@ -32,7 +32,7 @@ function loadFileAsText2() {
 	};
 };
 
-//Function to save the editor code from the 1st CodeMirror frame locally as a HTML file
+//Function to save the editor code from the 1st CodeMirror frame locally as a HTML file 
 function saveTextAsFile() {
 	var textToWrite = editor.getValue();
 	var textFileAsBlob = new Blob([textToWrite], { type: 'html' });
