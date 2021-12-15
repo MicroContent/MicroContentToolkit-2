@@ -59,6 +59,7 @@ Used libraries:<br>
   <li> When you are finished you can stop the toolkit with pressing <code>CTRL+C</code> in the terminal</li>
 </ol>
 <p> You should then see the successfully loaded Content Plugin System.</p>
+<p> To start the toolkit next time you can leave out doing steps 1,3 and 4</p>
 
 <br>
 <h2>Setup your plugins</h2>
