@@ -48,7 +48,7 @@ Used libraries:<br>
 <p> The user is also able to download the edited codes</p>
 <p><b>To use the toolkit copy the directory to your computer</b></p>
 <br>
-<h2>Start and Run the Server</h2>
+<h2>Start and Run the Server/Toolkit</h2>
 <ol>
   <li> Copy the <code>Primary-repo</code>-Folder to your computer as it is.</li>
   <li> <code>cd</code> to the <code>Primary-repo</code>-Folder with a Terminal or Powershell</li>
