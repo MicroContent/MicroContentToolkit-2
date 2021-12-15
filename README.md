@@ -18,10 +18,10 @@ Main repository of the project
 <h1>Definitions-Main parts</h1>
 <ul>
   <li> Toolkit: The main part of the plugin system. It does most of the jobs and connects all the other parts</li>
-  <li> Live editors: One for the viewer and one for the editor plugin. They are part of the toolkit as codemirror textfields</li>
-  <li> Editor iframe: hosted by node; inside a seamless iframe that is running an editor plugin html file</li>
-  <li> Viewer iframe: hosted by node; inside a seamless iframe that is running a viewer plugin html file</li>
-  <li> DATA section: Visually represents the data in a user friendly way that is being sent from viewer to editor </li>
+  <li> Live editors: One for the viewer and one for the editor plugin. They are part of the toolkit as codemirror textfields. They take up the left part of the screen abd are used to make live editing of the plugins easier.</li>
+  <li> Editor iframe: hosted by node; inside a seamless iframe that is running an editor plugin html file. This displays the content of the editor plugin.</li>
+  <li> Viewer iframe: hosted by node; inside a seamless iframe that is running a viewer plugin html file. This displays the content of the viewer plugin.</li>
+  <li> DATA section: Visually represents the data in a user friendly way that is being sent from editor to viewer </li>
 </ul>
 
 Used libraries:<br>
