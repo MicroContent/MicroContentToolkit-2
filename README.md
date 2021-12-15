@@ -50,6 +50,7 @@ Used libraries:<br>
 <br>
 <h2>Start and Run the Server</h2>
 <ol>
+  <li> Copy the <code>Primary-repo</code>-Folder to your computer as it is.</li>
   <li> <code>cd</code> to the <code>Primary-repo</code>-Folder with a Terminal or Powershell</li>
   <li> Check if the <code>server.js</code> and <code>package.json</code> are inside the <code>Primary-repo</code>-Folder </li>
   <li> Go to your Terminal/Powershell again and type <code>npm i</code></li>
