@@ -50,11 +50,12 @@ Used libraries:<br>
 <br>
 <h2>Start and Run the Server</h2>
 <ol>
-  <li> <code>cd</code> to the <code>Primary-rep</code>-Folder with a Terminal or Powershell</li>
-  <li> Check if the <code>server.js</code> and <code>package.json</code> are inside the <code>Primary-rep</code>-Folder </li>
+  <li> <code>cd</code> to the <code>Primary-repo</code>-Folder with a Terminal or Powershell</li>
+  <li> Check if the <code>server.js</code> and <code>package.json</code> are inside the <code>Primary-repo</code>-Folder </li>
   <li> Go to your Terminal/Powershell again and type <code>npm i</code></li>
   <li> Then type <code>node server.js</code></li>
   <li> Go to any browser and enter <a href="http://localhost:8080/">http://localhost:8080/</a></li>
+  <li> When you are finished you can stop the toolkit with pressing <code>CTRL+C</code> in the terminal</li>
 </ol>
 <p> You should then see the successfully loaded Content Plugin System.</p>
 
