@@ -18,10 +18,14 @@
   },
   "homepage": "https://github.com/SWEPM-Plugin-System-Project-Group/Primary-repo#readme",
   "dependencies": {
+    "@mui/icons-material": "~5.5.1",
+    "jquery": "3.6.0",
+    "popper.js": "^1.16.1",
     "body-parser": "^1.19.0",
+    "bootstrap": "~4.6.1",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "node-fetch": "^2.6.6",
+    "node-fetch": "^2.6.7",
     "seamless": "^1.4.1"
   }
 }

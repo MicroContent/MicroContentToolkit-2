@@ -2,7 +2,7 @@
 function loadFileAsText() {
 	
 	//The loaded plugin-file from the editor section
-	var fileToLoad = document.getElementById("first_i").files[0];
+	var fileToLoad = document.getElementById("input_file_editor").files[0];
 	
 	//Read the file,
 	//extract the content out of it,
@@ -12,6 +12,8 @@ function loadFileAsText() {
 	fileReader.onload = function (fileLoadedEvent) {
 		var textFromFileLoaded = fileLoadedEvent.target.result;
 		document.querySelector(".CodeMirror").CodeMirror.setValue(textFromFileLoaded);
+		reloadEditor();
+		child2load();
 	};
 }
 
@@ -29,6 +31,8 @@ function loadFileAsText2() {
 	fileReader.onload = function (fileLoadedEvent) {
 		var textFromFileLoaded = fileLoadedEvent.target.result;
 		document.querySelectorAll(".CodeMirror")[1].CodeMirror.setValue(textFromFileLoaded);
+		reloadViewer();
+		child1load();
 	};
 };
 

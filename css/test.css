@@ -11,10 +11,10 @@
     "Edit-editor Edit-editor Edit-editor Editor Buttons"
     "Edit-editor Edit-editor Edit-editor Data Buttons"
     "Edit-editor Edit-editor Edit-editor Data Buttons"
-    "Edit-viewer Edit-viewer Edit-viewer Viewer Buttons"
-    "Edit-viewer Edit-viewer Edit-viewer Viewer Buttons"
-    "Edit-viewer Edit-viewer Edit-viewer Viewer Buttons"
-    "Edit-viewer Edit-viewer Edit-viewer Viewer Buttons";
+    "Edit-viewer Edit-viewer Edit-viewer Viewer Buttons-bottom"
+    "Edit-viewer Edit-viewer Edit-viewer Viewer Buttons-bottom"
+    "Edit-viewer Edit-viewer Edit-viewer Viewer Buttons-bottom"
+    "Edit-viewer Edit-viewer Edit-viewer Viewer Buttons-bottom";
 }
 
 .Edit-editor { grid-area: Edit-editor; }
@@ -27,12 +27,32 @@
 
 .Viewer { grid-area: Viewer; }
 
-.Buttons { grid-area: Buttons; }
+.Buttons {
+  grid-area: Buttons;
+  padding: 1em;
+}
+
+.Buttons-bottom {
+  grid-area: Buttons-bottom;
+  padding: 1em;
+}
 
 #filler{
   height: 5%;
-  
 }
+
+.preview-box{
+  border: 1px rgb(0, 17, 255) solid;
+  margin: 0.5%;
+  overflow: scroll;
+  padding: 1em;
+}
+
+.btn {
+  margin-bottom: 0.5em;
+  margin-top: 0.5em;
+}
+
 /* iframe {
   overflow: scroll;
   border: 1px solid;
