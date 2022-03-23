@@ -1,5 +1,5 @@
 //Button's function to load the editor code into 1st CodeMirror frame
-function loadFileAsText() {
+function loadFileAsTextEditor() {
 	
 	//The loaded plugin-file from the editor section
 	var fileToLoad = document.getElementById("input_file_editor").files[0];
@@ -13,15 +13,15 @@ function loadFileAsText() {
 		var textFromFileLoaded = fileLoadedEvent.target.result;
 		document.querySelector(".CodeMirror").CodeMirror.setValue(textFromFileLoaded);
 		reloadEditor();
-		child2load();
+		initIframeEditor();
 	};
 }
 
 //Button's function to load the viewer code into 2nd CodeMirror frame
-function loadFileAsText2() {
+function loadFileAsTextViewer() {
 	
 	//The loaded file from the viewer section
-	var fileToLoad = document.getElementById("second_i").files[0];
+	var fileToLoad = document.getElementById("input_file_viewer").files[0];
 
 	//Read the file,
 	//extract the content out of it,
@@ -32,17 +32,20 @@ function loadFileAsText2() {
 		var textFromFileLoaded = fileLoadedEvent.target.result;
 		document.querySelectorAll(".CodeMirror")[1].CodeMirror.setValue(textFromFileLoaded);
 		reloadViewer();
-		child1load();
+		initIframeViewer();
 	};
-};
+}
 
-//Function to save the editor code from the 1st CodeMirror frame locally as a HTML file 
-function saveTextAsFile() {
-	var textToWrite = editor.getValue();
-	var textFileAsBlob = new Blob([textToWrite], { type: 'html' });
-	var fileNameToSaveAs = "editor.html"; //filename.extension
+/**
+ * Function to save the code from CodeMirror frame locally as a HTML file
+ * @param isEditor indicates whether editor or viewer code should be downloaded
+ */
+function saveTextAsFile(isEditor) {
+	const textToWrite = isEditor ? editor.getValue() : editor2.getValue();
+	const fileNameToSaveAs = isEditor? "editor.html": "viewer.html"; //filename.extension
+	const textFileAsBlob = new Blob([textToWrite], { type: 'html' });
 
-	var downloadLink = document.createElement("a");
+	const downloadLink = document.createElement("a");
 	downloadLink.download = fileNameToSaveAs;
 	downloadLink.innerHTML = "Download File";
 	if (window.webkitURL != null) {
@@ -56,61 +59,35 @@ function saveTextAsFile() {
 		document.body.appendChild(downloadLink);
 	}
 
-	downloadLink.click();
-};
-
-//Function to save the viewer code from the 2nd CodeMirror frame locally as a HTML file
-function saveTextAsFile2() {
-	var textToWrite = editor2.getValue();
-	var textFileAsBlob = new Blob([textToWrite], { type: 'html' });
-	var fileNameToSaveAs = "viewer.html"; //filename.extension
-
-	var downloadLink = document.createElement("a");
-	downloadLink.download = fileNameToSaveAs;
-	downloadLink.innerHTML = "Download File";
-	if (window.webkitURL != null) {
-		// Chrome allows the link to be clicked without actually adding it to the DOM.
-		downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
-	} else {
-		// Firefox requires the link to be added to the DOM before it can be clicked.
-		downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
-		downloadLink.onclick = destroyClickedElement;
-		downloadLink.style.display = "none";
-		document.body.appendChild(downloadLink);
-	}
-	
 	downloadLink.click();
 }
 
-
-
-
-
-
 //"Load Editor-CodeMirror"-Buttons' function
 // to retrieve the content of URL & place it into 1nd CodeMirror frame (editor part)
-function getSrcintoEditor() {
+function loadCodemirrorFromUrl(isEditor) {
+	const elementId = isEditor ? "input_url_editor" : "input_url_viewer";
+	const index = isEditor ? 0 : 1;
 	
 	//Retrieve the whole URL from the input of the editor section
-	var url_editor = document.getElementById("url-editor-input").value;
+	const url_editor = document.getElementById(elementId).value;
 	
 	//Using the Fetch API to retrieve the content of the URL's website
 	fetch(url_editor)
 		
 		//1st operation after successful retrieval
-		.then(x => {
+		.then(response => {
 		
 			//return the whole content in plain text form
-			return x.text();
+			return response.text();
 		
 		//2nd operation directly after the 1st one
-		}).then(y => {
+		}).then(text => {
 		
 			//Change the whole 1st CodeMirror frame (editor part) with the retrieved content
-			document.querySelector(".CodeMirror").CodeMirror.setValue(y);
+			document.querySelectorAll(".CodeMirror")[index].CodeMirror.setValue(text);
 
 		});
-};
+}
 
 //"Reload Editor"-button's function
 //to update the editor-iframe
@@ -136,7 +113,7 @@ function reloadEditor() {
 		success: function (data) {
 			
 			//Change the editor's iframe directly by giving it the right URL (localhost:9011)
-			document.getElementById('code_result_editor').src = data.link;
+			document.getElementById('iframe_editor').src = data.link;
 		},
 		
 		//If the sending process failed, then execute the following function
@@ -147,36 +124,6 @@ function reloadEditor() {
 		},
 	});
 }
-
-
-
-
-
-
-
-//"Load Viewer-CodeMirror"-Buttons' function
-// to retrieve the content of URL & place it into 2nd CodeMirror frame (viewer part)
-function getSrcintoViewer() {
-	
-	//Retrieve the whole URL from the input of the viewer section
-	var url_viewer = document.getElementById("url-viewer-input").value;
-
-	//Using the Fetch API to retrieve the content of the URL's website
-	fetch(url_viewer)
-	
-		//1st operation after successful retrieval
-		.then(x => {
-		
-			//return the whole content in plain text form
-			return x.text();
-		
-		//2nd operation directly after the 1st one
-		}).then(y => {
-		
-			//Change the whole 2nd CodeMirror frame (viewer part) with the retrieved content
-			document.querySelectorAll(".CodeMirror")[1].CodeMirror.setValue(y);
-		});
-};
 
 //"Reload Viewer"-button's function
 //to update the viewer-iframe
@@ -202,7 +149,7 @@ function reloadViewer() {
 		success: function (data) {
 			
 			//Change the viewer's iframe directly by giving it the right URL (localhost:9013)
-			document.getElementById('code_result_viewer').src = data.link;
+			document.getElementById('iframe_viewer').src = data.link;
 			
 			
 		},

@@ -5,9 +5,9 @@
 //Button's function to load the editor code into 1st CodeMirror frame
 function reloadEditor() {
 	//Retrieve the editor-code from 1st CodeMirror frame
-	var CodeMirror_code = loadFileAsText();
+	var CodeMirror_code = loadFileAsTextEditor();
 
-	// Checking whether the function loadFileAsText() has retrieved any value or it is null (no value)
+	// Checking whether the function loadFileAsTextEditor() has retrieved any value or it is null (no value)
 	if (CodeMirror_code != null ) {
 		// if value is found, then removing all HTML tags and leaving only the plain text
 		var editor_code = CodeMirror_code.replace('<div>','');
@@ -23,9 +23,9 @@ function reloadEditor() {
 //Button's function to load the editor code into 2nd CodeMirror frame
 function reloadViewer() {
 	//Retrieve the editor-code from 2nd CodeMirror frame
-	var CodeMirror_code = loadFileAsText2();
+	var CodeMirror_code = loadFileAsTextViewer();
 
-	// Checking whether the function loadFileAsText2() has retrieved any value or it is null (no value)
+	// Checking whether the function loadFileAsTextViewer() has retrieved any value or it is null (no value)
 	if (CodeMirror_code != null ) {
 		// if value is found, then removing all HTML tags and leaving only the plain text
 		var editor_code = CodeMirror_code.replace('<article>','');
@@ -39,14 +39,14 @@ function reloadViewer() {
 
 
 //Function to load the editor code into 1st CodeMirror frame
-function loadFileAsText () {
+function loadFileAsTextEditor () {
 	return '<div>Question:</div>';
 	// If we want to test the returning of null value, then test the return code below:
 	// return null
 }
 
 //Function to load the editor code into 2nd CodeMirror frame
-function loadFileAsText2 () {
+function loadFileAsTextViewer () {
 	return '<article>Title:</article>';
 	// If we want to test the returning of null value, then test the return code below:
 	// return null                
@@ -56,5 +56,5 @@ function loadFileAsText2 () {
 // Each function has a name and we export it as a method to the other file
 exports.method1 = reloadEditor
 exports.method2 = reloadViewer
-exports.method3 = loadFileAsText
-exports.method4 = loadFileAsText2
+exports.method3 = loadFileAsTextEditor
+exports.method4 = loadFileAsTextViewer

@@ -51,8 +51,8 @@
         var editorValues;
         var editorObject;
         // window.onload = function() {
-        //     var child1 = document.getElementById('code_result_viewer');
-        //     var child2 = document.getElementById('code_result_editor');
+        //     var child1 = document.getElementById('iframe_viewer');
+        //     var child2 = document.getElementById('iframe_editor');
         //     // Turns the iframe into a seamless iframe.
         //     window.seamless(child1);
         //     window.seamless(child2);
@@ -86,20 +86,20 @@
         //         event.preventDefault();
         //             child1.send({
         //                 type: 'seamless_styles',
-        //                 data: [document.getElementById('childstyles2').value]
+        //                 data: [document.getElementById('input_text_css_inject').value]
         //             });
         //         };
         //     };
         
 
         // multi purpose function
-        function child2load(){
+        function initIframeEditor(){
 
             //make the editor into seamless iframe
-            var child2 = document.getElementById('code_result_editor');
+            var child2 = document.getElementById('iframe_editor');
             window.seamless(child2);
 
-            //get infor from the editor when the function is called
+            //get info from the editor when the function is called
             child2.receive(function(data) {
                 //type has to be toViewer
                 switch(data.type) {
@@ -119,11 +119,11 @@
                 });
             };  
             
-        // document.getElementById("chload").addEventListener("click",child1load)
+        // document.getElementById("btn_reload_viewer").addEventListener("click",initIframeViewer)
         //multi purpose function
-        function child1load(){
+        function initIframeViewer(){
             //make viewer into seamless iframe
-            var child1 = document.getElementById('code_result_viewer');
+            var child1 = document.getElementById('iframe_viewer');
             window.seamless(child1);
 
             //send data to the viewer; the data we get from the editor
@@ -144,7 +144,7 @@
                     child1.send({
                         type: 'seamless_styles',
                         //get the data from the field where the style got copied
-                        data: [document.getElementById('childstyles2').value]
+                        data: [document.getElementById('input_text_css_inject').value]
                     });
                 };
         };
@@ -152,7 +152,7 @@
         
         //make the object into a prettier form and display it to the user to have some chance for debugging
         function loadData(){
-            var dataout = document.getElementById("datatoviewer")
+            var dataout = document.getElementById("txt_datatoviewer")
             var niceout=JSON.stringify(editorObject);
             dataout.innerText=niceout
 
@@ -172,17 +172,17 @@
             <div class="Editor-Section">
 
                 <h2>Editor</h2>
-                <input id="input_file_editor" onchange="loadFileAsText()" type="file">
+                <input id="input_file_editor" onchange="loadFileAsTextEditor()" type="file">
 
                 <!-- alternatively enter a url to load a file -->
                 <br><br>
                 <label>Src-Code into Editor Section</label>
-                <input type="text" placeholder="Enter URL..." id="url-editor-input">
-                <button id="url-editor" type="button" onclick="getSrcintoEditor()">Load Editor-CodeMirror</button>
+                <input type="text" placeholder="Enter URL..." id="input_url_editor">
+                <button id="btn_url_editor" type="button" onclick="loadCodemirrorFromUrl(true)">Load Editor-CodeMirror</button>
 
                 <br><br>
                 <!-- save the codemirror edited file to your computer -->
-                <button class="btn btn-primary" type="button" id="save1" onclick="saveTextAsFile()">Download Editor</button>
+                <button class="btn btn-primary" type="button" id="btn_download_editor" onclick="saveTextAsFile(true)">Download Editor</button>
             </div>
         </div>
 
@@ -191,45 +191,44 @@
 
             <div class="Viewer-Section">
                 <h2>Viewer</h2>
-                <input id="second_i" type="file" onchange="loadFileAsText2()">
+                <input id="input_file_viewer" type="file" onchange="loadFileAsTextViewer()">
 
                                 <!-- alternatively enter a url to load a file -->
                 <br><br>
                 <label>Src-Code into Viewer Section</label>
-                <input type="text" placeholder="Enter URL..." id="url-viewer-input">
-                <button id="url" type="button" onclick="getSrcintoViewer()">Load Viewer-CodeMirror</button>
+                <input type="text" placeholder="Enter URL..." id="input_url_viewer">
+                <button id="btn_url_viewer" type="button" onclick="loadCodemirrorFromUrl(false)">Load Viewer-CodeMirror</button>
 
                 <br><br>
 
                 <!-- save the codemirror edited file to your computer -->
-                <button class="btn btn-primary" type="button" id="save2" onclick="saveTextAsFile2()">Save viewer plugin to file</button>
+                <button class="btn btn-primary" type="button" id="btn_download_viewer" onclick="saveTextAsFile(false)">Download Viewer</button>
 
             </div>
 
-            <div id="filler"></div>
-            <div id="filler"></div>
+            <div class="filler"></div>
+            <div class="filler"></div>
 
             <div class="Injection-Section">
 
                 <h2>Style Injection</h2>
                 <!--seamless injection-->
-                <label for="url">Open Stylesheet</label><br>
+                <label for="btn_url_viewer">Open Stylesheet</label><br>
 
-                <input placeholder="Enter CSS's URL..." type="file" id="childstyles"><br>
+                <input placeholder="Enter CSS's URL..." type="file" id="input_file_css_inject"><br>
                 <br>
                 <!-- placeholder textfield for textual style description -->
-                <input id="childstyles2" type="text" placeholder="Enter a style">
+                <input id="input_text_css_inject" type="text" placeholder="Enter a style">
                 <!-- call the seamless function to inject style -->
                 <button class="btn btn-secondary" type="button" onclick="injectStyles(event)">Submit</button>
-                <!-- <a href="#" id="injectstyles" onclick="injectStyles(event)" class="button postfix">Submit</a> -->
 
                 <!-- script placed here because it was throwing errors elsewhere
                 this reads the stylesheet file converts it and places it in the placeholder field to be injected -->
                 <script>
                     //reading file
-                    document.getElementById("childstyles").addEventListener("change", readFileAsString)
+                    document.getElementById("input_file_css_inject").addEventListener("change", readFileAsString)
                     function readFileAsString() {
-                        f=document.getElementById('childstyles')
+                        f=document.getElementById('input_file_css_inject')
                         var files = f.files;
                         if (files.length === 0) {
                             console.log('No file is selected');
@@ -241,7 +240,7 @@
                         reader.onload = function() {
                             console.log(reader.result)
                             var  outp= reader.result;
-                            var fin=document.getElementById('childstyles2');
+                            var fin=document.getElementById('input_text_css_inject');
                             fin.value=outp;
                         };
                         reader.readAsText(files[0]);
@@ -254,13 +253,13 @@
 
         <!-- live editors -->
         </div>
-        <div class="Edit-editor" id="editor1"
+        <div class="Edit-editor" id="codemirror_editor"
             style="position:relative;border: 1px rgb(0, 17, 255) solid; margin: 0.5%;">
-            <textarea id="live" class="form-control">Upload to change editor...</textarea>
+            <textarea id="codemirror_content_editor" class="form-control">Upload to change editor...</textarea>
             <!-- script for codemirror implementation -->
             <script>
                 var editor = CodeMirror.fromTextArea
-                    (document.getElementById('live'), {
+                    (document.getElementById('codemirror_content_editor'), {
                         mode: "htmlmixed",
                         theme: "dracula",
                         lineNumbers: true,
@@ -276,13 +275,13 @@
 
 
         <!-- viewer live editor -->
-        <div class="Edit-viewer" id="editor2"
+        <div class="Edit-viewer" id="codemirror_viewer"
             style="position:relative; border: 1px rgb(0, 17, 255) solid; margin: 0.5%;">
-            <textarea id="live2" class="form-control">Upload to change viewer...</textarea>
+            <textarea id="codemirror_content_viewer" class="form-control">Upload to change viewer...</textarea>
             <!-- making codemirror -->
             <script>
                 var editor2 = CodeMirror.fromTextArea
-                    (document.getElementById('live2'), {
+                    (document.getElementById('codemirror_content_viewer'), {
                         mode: "htmlmixed",
                         theme: "dracula",
                         lineNumbers: true,
@@ -302,7 +301,7 @@
                 <h2 class="float-start">Editor Preview</h2>
                 <!-- button outside of iframe to call functions that make the node hosting part happen in the background and transform the iframe into seamless -->
 
-                <button class="btn float-end" onclick="reloadEditor(); child2load()" title="reload editor">
+                <button class="btn float-end" onclick="reloadEditor(); initIframeEditor()" title="reload editor">
                     <i class="material-icons">refresh</i>
                 </button>
             </div>
@@ -310,7 +309,7 @@
             <div class="panel-body" id="editor_container">
             </div>
             <!-- iframe gets the source from user input -->
-            <iframe id="code_result_editor" class="align-bottom" style="width:95%; height:80%" scrolling="yes" src="" ></iframe>
+            <iframe id="iframe_editor" class="align-bottom" style="width:95%; height:80%" scrolling="yes" src="" ></iframe>
         </div>
 
 
@@ -325,9 +324,8 @@
                 <!-- <a href="#" id="sendToChild" onclick="sendToChild(event)" class="button postfix">Load Data from Editor</a> -->
             </div>
             <div class="panel-body">
-                <!-- <p id="datatoviewer"></p> -->
                 <!-- here comes the data from the editor -->
-                <textarea id="datatoviewer" style="width: 80%; min-height: 150px" disabled="disabled"></textarea>
+                <textarea id="txt_datatoviewer" style="width: 80%; min-height: 150px" disabled="disabled"></textarea>
             </div>
         </div>
 
@@ -338,7 +336,7 @@
             <div class="panel-heading">
                 <h2 class="float-start">Viewer</h2>
                 <!-- button outside of iframe to call functions that make the node hosting part happen in the background and transform the iframe into seamless -->
-                <button id='chload' class="btn float-end" onclick="reloadViewer(); child1load()" title="reload viewer">
+                <button id="btn_reload_viewer" class="btn float-end" onclick="reloadViewer(); initIframeViewer()" title="reload viewer">
                     <i class="material-icons">refresh</i>
                 </button>
             </div>
@@ -347,7 +345,7 @@
             <br>
             
             <!-- iframe gets the source from user input -->
-            <iframe id="code_result_viewer" style="width:95%; height:80%" scrolling="yes"  src=""></iframe>
+            <iframe id="iframe_viewer" style="width:95%; height:80%" scrolling="yes" src=""></iframe>
         </div>
     </div>
     
