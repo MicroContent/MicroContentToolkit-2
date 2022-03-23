@@ -1,6 +1,11 @@
 # dependencies
 /node_modules
 
+# testing dependencies
+/test/node_modules
+/test/package.json
+/test/package-lock.json
+
 # IDEs
 /.idea
 .project
