@@ -100,12 +100,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //CORS (Cross-Origin Resource Sharing)
 app.use(cors({ origin: 'http://localhost:8080' }));
 
-//The URL with the port 9010 is only accessable through a POST-request by the client
+//The URL with the port 9010 is only accessible through a POST-request by the client
 app.post("/", (req, res) => {
     
     var body = '';
 
-    //Gets the content (editor-code) directly from the sent request (which is a JSON)
+    //Gets the content (editor-code) directly from the send request (which is a JSON)
     editor_plug_code = req.body.message;
     
     //Send the the new URL with different port to the client
