@@ -1,4 +1,6 @@
-//Button's function to load the editor code into 1st CodeMirror frame
+/**
+ * Read source code provided in a file as text and sends it to the editor section
+ */
 function loadFileAsTextEditor() {
 	
 	//The loaded plugin-file from the editor section
@@ -11,13 +13,15 @@ function loadFileAsTextEditor() {
 	fileReader.readAsText(fileToLoad, "UTF-8");
 	fileReader.onload = function (fileLoadedEvent) {
 		var textFromFileLoaded = fileLoadedEvent.target.result;
-		document.querySelector(".CodeMirror").CodeMirror.setValue(textFromFileLoaded);
-		reloadEditor();
-		initIframeEditor();
+		document.querySelector(".CodeMirror").CodeMirror.setValue(textFromFileLoaded); // init code editor
+		reloadEditor(); // init editor preview GUI
+		initIframeEditor(); // init editor preview logic
 	};
 }
 
-//Button's function to load the viewer code into 2nd CodeMirror frame
+/**
+ * Read source code provided in a file as text and sends it to the viewer section
+ */
 function loadFileAsTextViewer() {
 	
 	//The loaded file from the viewer section
@@ -30,9 +34,9 @@ function loadFileAsTextViewer() {
 	fileReader.readAsText(fileToLoad, "UTF-8");	
 	fileReader.onload = function (fileLoadedEvent) {
 		var textFromFileLoaded = fileLoadedEvent.target.result;
-		document.querySelectorAll(".CodeMirror")[1].CodeMirror.setValue(textFromFileLoaded);
-		reloadViewer();
-		initIframeViewer();
+		document.querySelectorAll(".CodeMirror")[1].CodeMirror.setValue(textFromFileLoaded); // init code viewer
+		reloadViewer(); // init viewer preview GUI
+		initIframeViewer(); // init viewer preview logic
 	};
 }
 
@@ -62,8 +66,10 @@ function saveTextAsFile(isEditor) {
 	downloadLink.click();
 }
 
-//"Load Editor-CodeMirror"-Buttons' function
-// to retrieve the content of URL & place it into 1nd CodeMirror frame (editor part)
+/**
+ * reads source code provided by an url as text and loads it into the corresponding codemirror
+ * @param isEditor indicates whether input should be read from
+ */
 function loadCodemirrorFromUrl(isEditor) {
 	const elementId = isEditor ? "input_url_editor" : "input_url_viewer";
 	const index = isEditor ? 0 : 1;
@@ -73,24 +79,21 @@ function loadCodemirrorFromUrl(isEditor) {
 	
 	//Using the Fetch API to retrieve the content of the URL's website
 	fetch(url_editor)
-		
-		//1st operation after successful retrieval
+
 		.then(response => {
-		
 			//return the whole content in plain text form
 			return response.text();
-		
-		//2nd operation directly after the 1st one
-		}).then(text => {
-		
+
+		}).then(textResponse => {
 			//Change the whole 1st CodeMirror frame (editor part) with the retrieved content
-			document.querySelectorAll(".CodeMirror")[index].CodeMirror.setValue(text);
+			document.querySelectorAll(".CodeMirror")[index].CodeMirror.setValue(textResponse);
 
 		});
 }
 
-//"Reload Editor"-button's function
-//to update the editor-iframe
+/**
+ * Updates editor IFrame
+ */
 function reloadEditor() {
 	
 	//Retrieve the editor-code from 1st CodeMirror frame
@@ -111,22 +114,21 @@ function reloadEditor() {
 		
 		//If the sending process was successful, then execute the following function with the received data from the server
 		success: function (data) {
-			
 			//Change the editor's iframe directly by giving it the right URL (localhost:9011)
 			document.getElementById('iframe_editor').src = data.link;
 		},
 		
 		//If the sending process failed, then execute the following function
 		error: function (xhr, status, error) {
-			
 			//Printing the error into the console of the client (web browser)
 			console.log('Error: ' + error.message);
 		},
 	});
 }
 
-//"Reload Viewer"-button's function
-//to update the viewer-iframe
+/**
+ * Updates viewer IFrame
+ */
 function reloadViewer() {
 	
 	//Retrieve the viewer-code from 2nd CodeMirror frame
@@ -147,16 +149,12 @@ function reloadViewer() {
 		
 		//If the sending process was successful, then execute the following function with the received data from the server
 		success: function (data) {
-			
 			//Change the viewer's iframe directly by giving it the right URL (localhost:9013)
 			document.getElementById('iframe_viewer').src = data.link;
-			
-			
 		},
 		
 		//If the sending process failed, then execute the following function
 		error: function (xhr, status, error) {
-			
 			//Printing the error into the console of the client (web browser)
 			console.log('Error: ' + error.message);
 		},
