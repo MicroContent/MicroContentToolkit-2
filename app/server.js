@@ -25,7 +25,7 @@ var mimeTypes = {
 //The whole function is being used to load only HTML without CSS and JS (toolkit without CSS and JS)
 const server = http.createServer(function (req, res) {
     res.writeHead(200, { 'Content-Type': 'text/html' })
-    fs.readFile('main/LiveEdit.html', function (error, data) { //main toolkit site
+    fs.readFile('app/index.html', function (error, data) { //main toolkit site
         if (error) {
             res.writeHead(404)
             res.write('Error: File not found')
@@ -61,7 +61,7 @@ function onRequest_a(req, response) {
             return;
         }
         if (fs.statSync(filename).isDirectory())
-            filename += 'main/LiveEdit.html'; //main toolkit site
+            filename += 'app/index.html'; //main toolkit site
         fs.readFile(filename, "binary", function (err, file) {
             if (err) {
                 response.writeHead(500, { "Content-Type": "text/plain" });
@@ -100,12 +100,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //CORS (Cross-Origin Resource Sharing)
 app.use(cors({ origin: 'http://localhost:8080' }));
 
-//The URL with the port 9010 is only accessable through a POST-request by the client
+//The URL with the port 9010 is only accessible through a POST-request by the client
 app.post("/", (req, res) => {
     
     var body = '';
-    
-    //Gets the content (editor-code) directly from the sent request (which is a JSON)
+
+    //Gets the content (editor-code) directly from the send request (which is a JSON)
     editor_plug_code = req.body.message;
     
     //Send the the new URL with different port to the client
@@ -144,12 +144,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //CORS (Cross-Origin Resource Sharing)
 app.use(cors({ origin: 'http://localhost:8080' }));
 
-//The URL with the port 9013 is only accessable through a POST-request by the client
+//The URL with the port 9013 is only accessible through a POST-request by the client
 app.post("/", (req, res) => {
     
     var body = '';
-    
-    //Gets the content (viewer-code) directly from the sent request (which is a JSON)
+
+    //Gets the content (viewer-code) directly from the send request (which is a JSON)
     editor_plug_code = req.body.message;
     
     //Send the the new URL with different port to the client

@@ -1,0 +1,18 @@
+version: '3.2'
+
+services:
+  microcontent-toolkit:
+    image: imagename:latest
+    networks:
+      - web
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+      - "9010:9010"
+      - "9011:9011"
+      - "9012:9012"
+      - "9013:9013"
+
+
+networks:
+  web:

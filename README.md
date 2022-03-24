@@ -132,27 +132,24 @@ Used libraries:<br>
 <p> Basically the main part of the whole toolkit. It contains the html of the toolkit and some functions for seamless and codemirror.</p>
 <h3>Functions</h3>
 <ul>
-  <li><b>child2load: </b> This function is called when the reload editor is clicked. Transforms the iframe into seamless, but also contains another subroutine, handling the receiving of the data from the editor: Since the number of inputs depends on the editor, it handles the data as an object.</li>
-  <li><b>child1load:</b> It is called when reloading the viewer iframe. Transforms the iframe into seamless, and a subfunction handles the data sending to the viewer. This function is called when the user clicked send data to viewer. The type of data is setContent; the viewer has to handle the message accordingly. The data can be accessed with data.main[0] as an array of arrays-(contentType:content); The other subfunction is a similar sending protocol but with different type because it is used for injection.</li>
+  <li><b>initIframeEditor: </b> This function is called when the reload editor is clicked. Transforms the iframe into seamless, but also contains another subroutine, handling the receiving of the data from the editor: Since the number of inputs depends on the editor, it handles the data as an object.</li>
+  <li><b>initIframeViewer:</b> It is called when reloading the viewer iframe. Transforms the iframe into seamless, and a subfunction handles the data sending to the viewer. This function is called when the user clicked send data to viewer. The type of data is setContent; the viewer has to handle the message accordingly. The data can be accessed with data.main[0] as an array of arrays-(contentType:content); The other subfunction is a similar sending protocol but with different type because it is used for injection.</li>
   <li><b>loadData: </b> displays a user friendly representation of the sent data</li>
   <li><b>readFileAsString: </b> This function is placed outside the script file and immidiately after the button that triggers it. It reads the css file that is to be injected to the viewer. After reading it places it into a placeholder text field.</li>
   <li><b>Codemirror.fromTextAre: </b> is called in two places. This tranforms the simple textares to codemorror editors and sets the basic settings like autocorrection. The functionality of the codemirror parts is expandable.</li>
-  <li><b>loadData: </b> displays a user friendly representation of the sent data</li>
 </ul>
 <h2>script.js</h2>
 <p> Contains the main JS script that is not strictly seamless related, but more related with the server and all the buttonclicks. All important user-defined JavaScript functions will be exectued inside this file.</p>
 <h3>Functions</h3>
 <ul>
-  <li><b>loadFileAsText:</b> This function is called when the 'Load the first editor'-button is clicked after uploading the editor plugin file. This function will read the plugin file. The function will extract the full complete content out of the file and then the extracted code will be placed into the first CodeMirror.</li><br>
+  <li><b>loadFileAsTextEditor:</b> This function is called when the 'Load the first editor'-button is clicked after uploading the editor plugin file. This function will read the plugin file. The function will extract the full complete content out of the file and then the extracted code will be placed into the first CodeMirror.</li><br>
   
-  <li><b>loadFileAsText2:</b> This function is very similar to the <b>loadFIleAsText</b> function. But this function will read the viewer file and then the extracted code will be placed into the second CodeMirror instead of the first CodeMirror.</li><br>
-  <li><b>saveTextAsFile: </b> This function is called when the respective button is clicked. Saves the editor plugin after the user edited the code in the first live editor (1st CodeMirror).</li><br>
-
- <li><b>saveTextAsFile2: </b> This function is very similar to the <b>saveTextAsFile</b>. But this one saves the viewer code from the second live editor (2nd CodeMirror).</li><br>
+  <li><b>loadFileAsTextViewer:</b> This function is very similar to the <b>loadFIleAsTextEditor</b> function. But this function will read the viewer file and then the extracted code will be placed into the second CodeMirror instead of the first CodeMirror.</li><br>
+  <li><b>saveTextAsFile: </b> This function is called when the respective button (Download Editor / Download Viewer) is clicked. Saves the content of one of the code mirrors, depending on which button has been clicked as a file</li><br>
  
- <li><b>getSrcintoEditor:</b> This function is called when a URL to any public raw plugin code is placed into the input bar and the respective button is clicked. Then the process is also similar to the <b>loadFileAsText</b>. This function will read the public raw plugin code. The function will extract the full complete content out of the URL and then the extracted code will be placed into the first CodeMirror.</li><br>
+ <li><b>loadCodemirrorFromUrl:</b> This function is called when a URL to any public raw plugin code is placed into the input bar and the respective button is clicked. Then the process is also similar to the <b>loadFileAsText</b>. This function will read the public raw plugin code. The function will extract the full complete content out of the URL and then the extracted code will be placed into the first CodeMirror.</li><br>
   
- <li><b>getSrcintoViewer: </b> This function is very similar to the <b>getSrcintoEditor</b>. But this function will read the public raw plugin code for the viewer part and the extracted code will be placed into the second CodeMirror.</li><br>
+ <li><b>loadCodemirrorViewerFromUrl: </b> This function is very similar to the <b>loadCodemirrorFromUrl</b>. But this function will read the public raw plugin code for the viewer part and the extracted code will be placed into the second CodeMirror.</li><br>
  
   <li><b>reloadEditor: </b> This function is called when the respective button is clicked. This function will ouput the code from the first CodeMirror into the editor iframe through a network connection with the node.js server. The connection will be carried out through the localhost network.</li><br>
   
@@ -179,7 +176,7 @@ Used libraries:<br>
   <li>You need to go to the testing folder <code>'test'</code></li>
   <li>Open the terminal and type the following command: <code>npm init</code> to install json folder inside</li>
   <li>Then type: <code>install --save-dev jest</code> -> now you shall see json folder <code>package-lock.json</code> inside</li>
-  <li>Open <code>package.json</code> and change <code>"test":"test"</code> to <code>"test":"jest"</code></li>
+  <li>Open <code>package.json</code> and in the <code>scripts:</code>-section change <code>"test":"test"</code> to <code>"test":"jest"</code></li>
   <li>Finally, to test the code, type in the terminal: <code>npm test</code> and it should run properly</li>
 </ol>
 <h3>Optional:</h3>

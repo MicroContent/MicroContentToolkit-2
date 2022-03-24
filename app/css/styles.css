@@ -1,0 +1,77 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 0.5fr 1.9fr 0.6fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-auto-columns: 1fr;
+  gap: 0 0;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "Edit-editor Edit-editor Edit-editor Editor Buttons"
+    "Edit-editor Edit-editor Edit-editor Editor Buttons"
+    "Edit-editor Edit-editor Edit-editor Editor Buttons"
+    "Edit-editor Edit-editor Edit-editor Data Buttons"
+    "Edit-editor Edit-editor Edit-editor Data Buttons"
+    "Edit-viewer Edit-viewer Edit-viewer Viewer Buttons-bottom"
+    "Edit-viewer Edit-viewer Edit-viewer Viewer Buttons-bottom"
+    "Edit-viewer Edit-viewer Edit-viewer Viewer Buttons-bottom"
+    "Edit-viewer Edit-viewer Edit-viewer Viewer Buttons-bottom";
+}
+
+.Edit-editor { grid-area: Edit-editor; }
+
+.Edit-viewer { grid-area: Edit-viewer; }
+
+.Editor { grid-area: Editor; }
+
+.Data { grid-area: Data; }
+
+.Viewer { grid-area: Viewer; }
+
+.Buttons {
+  grid-area: Buttons;
+  padding: 1em;
+}
+
+.Buttons-bottom {
+  grid-area: Buttons-bottom;
+  padding: 1em;
+}
+
+.filler{
+  height: 10%;
+}
+
+.codemirror {
+  position:relative;
+  border: 1px rgb(0, 17, 255) solid;
+  margin: 0.5%;
+}
+
+.iframe{
+  width:95%;
+  min-height: 80%;
+  overflow: scroll;
+}
+
+.preview-box{
+  border: 1px rgb(0, 17, 255) solid;
+  margin: 0.5%;
+  overflow: scroll;
+  padding: 1em;
+}
+
+.btn-margin {
+  margin-bottom: 0.5em;
+  margin-top: 0.5em;
+}
+
+/* iframe {
+  overflow: scroll;
+  border: 1px solid;
+  position: relative;
+  
+} */
+
+
+
+  
