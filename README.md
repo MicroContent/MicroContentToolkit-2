@@ -137,7 +137,6 @@ Used libraries:<br>
   <li><b>loadData: </b> displays a user friendly representation of the sent data</li>
   <li><b>readFileAsString: </b> This function is placed outside the script file and immidiately after the button that triggers it. It reads the css file that is to be injected to the viewer. After reading it places it into a placeholder text field.</li>
   <li><b>Codemirror.fromTextAre: </b> is called in two places. This tranforms the simple textares to codemorror editors and sets the basic settings like autocorrection. The functionality of the codemirror parts is expandable.</li>
-  <li><b>loadData: </b> displays a user friendly representation of the sent data</li>
 </ul>
 <h2>script.js</h2>
 <p> Contains the main JS script that is not strictly seamless related, but more related with the server and all the buttonclicks. All important user-defined JavaScript functions will be exectued inside this file.</p>
@@ -146,9 +145,7 @@ Used libraries:<br>
   <li><b>loadFileAsTextEditor:</b> This function is called when the 'Load the first editor'-button is clicked after uploading the editor plugin file. This function will read the plugin file. The function will extract the full complete content out of the file and then the extracted code will be placed into the first CodeMirror.</li><br>
   
   <li><b>loadFileAsTextViewer:</b> This function is very similar to the <b>loadFIleAsTextEditor</b> function. But this function will read the viewer file and then the extracted code will be placed into the second CodeMirror instead of the first CodeMirror.</li><br>
-  <li><b>saveTextAsFile: </b> This function is called when the respective button is clicked. Saves the editor plugin after the user edited the code in the first live editor (1st CodeMirror).</li><br>
-
- <li><b>saveTextAsFile2: </b> This function is very similar to the <b>saveTextAsFile</b>. But this one saves the viewer code from the second live editor (2nd CodeMirror).</li><br>
+  <li><b>saveTextAsFile: </b> This function is called when the respective button (Download Editor / Download Viewer) is clicked. Saves the content of one of the code mirrors, depending on which button has been clicked as a file</li><br>
  
  <li><b>loadCodemirrorFromUrl:</b> This function is called when a URL to any public raw plugin code is placed into the input bar and the respective button is clicked. Then the process is also similar to the <b>loadFileAsText</b>. This function will read the public raw plugin code. The function will extract the full complete content out of the URL and then the extracted code will be placed into the first CodeMirror.</li><br>
   
