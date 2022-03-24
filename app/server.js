@@ -4,6 +4,7 @@ const fs = require('fs');
 const url = require("url");
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const fetch = require('node-fetch');
 const express = require('express');
 const app = express();
 
@@ -102,7 +103,9 @@ app.use(cors({ origin: 'http://localhost:8080' }));
 //The URL with the port 9010 is only accessable through a POST-request by the client
 app.post("/", (req, res) => {
     
-    //Gets the content (editor-code) directly from the send request (which is a JSON)
+    var body = '';
+
+    //Gets the content (editor-code) directly from the sent request (which is a JSON)
     editor_plug_code = req.body.message;
     
     //Send the the new URL with different port to the client
@@ -144,6 +147,8 @@ app.use(cors({ origin: 'http://localhost:8080' }));
 //The URL with the port 9013 is only accessible through a POST-request by the client
 app.post("/", (req, res) => {
     
+    var body = '';
+
     //Gets the content (viewer-code) directly from the send request (which is a JSON)
     editor_plug_code = req.body.message;
     

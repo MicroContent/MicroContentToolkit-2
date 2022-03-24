@@ -27,14 +27,21 @@
     <script src="../codemirror-5.63.3/addon/fold/xml-fold.js"></script>
     <!--material icons and bootstrap-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <!--other-->
     <link rel="stylesheet" href="app/css/styles.css">
     <script src="app/js/script.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="../node_modules/seamless/build/seamless.parent.min.js"></script>
+
+    <style>
+        .CodeMirror {
+            height: 100%;
+            width: 100%;
+            position: absolute
+        }
+    </style>
 
 
     <!-- seamless related functions -->
@@ -91,7 +98,7 @@
                 console.log("sending", editorObject)
             };
 
-            //inject a style to the viewer to represent the learning website 
+            //inject a style to the viewer to represent the learning website
             window.injectStyles = function (event) {
 
                 event.preventDefault();
@@ -138,7 +145,7 @@
 
             <div class="filler"></div>
             <!-- save the codemirror edited file to your computer -->
-            <button class="btn-margin btn-primary" type="button" id="btn_download_editor" onclick="saveTextAsFile(true)">
+            <button class="btn btn-margin btn-primary" type="button" id="btn_download_editor" onclick="saveTextAsFile(true)">
                 Download Editor
             </button>
         </div>
@@ -160,7 +167,7 @@
             <div class="filler"></div>
 
             <!-- save the codemirror edited file to your computer -->
-            <button class="btn-margin btn-primary" type="button" id="btn_download_viewer" onclick="saveTextAsFile(false)">
+            <button class="btn btn-margin btn-primary" type="button" id="btn_download_viewer" onclick="saveTextAsFile(false)">
                 Download Viewer
             </button>
         </div>
@@ -172,20 +179,19 @@
             <h2>Style Injection</h2>
             <!--seamless injection-->
             <label for="btn_url_viewer">Open Stylesheet</label><br>
-            <input class="btn-margin" placeholder="Enter CSS's URL..." type="file" id="input_file_css_inject"><br>
+            <input class="btn btn-margin" placeholder="Enter CSS's URL..." type="file" id="input_file_css_inject"><br>
             <!-- placeholder textfield for textual style description -->
             <input id="input_text_css_inject" type="text" placeholder="Enter a style">
             <!-- call the seamless function to inject style -->
-            <button class="btn-margin btn-secondary" type="button" onclick="injectStyles(event)">Submit</button>
+            <button class="btn btn-margin btn-secondary" type="button" onclick="injectStyles(event)">Submit</button>
 
             <!-- script placed here because it was throwing errors elsewhere
             this reads the stylesheet file converts it and places it in the placeholder field to be injected -->
             <script>
                 //reading file
                 document.getElementById("input_file_css_inject").addEventListener("change", readFileAsString)
-
                 function readFileAsString() {
-                    f = document.getElementById('input_file_css_inject')
+                    f=document.getElementById('input_file_css_inject')
                     var files = f.files;
                     if (files.length === 0) {
                         console.log('No file is selected');
@@ -194,11 +200,11 @@
 
                     var reader = new FileReader();
                     //placing file content to placeholder to be submitted
-                    reader.onload = function () {
+                    reader.onload = function() {
                         console.log(reader.result)
-                        var outp = reader.result;
-                        var fin = document.getElementById('input_text_css_inject');
-                        fin.value = outp;
+                        var  outp= reader.result;
+                        var fin=document.getElementById('input_text_css_inject');
+                        fin.value=outp;
                     };
                     reader.readAsText(files[0]);
                 }
@@ -219,7 +225,7 @@
                 theme: "dracula",
                 lineNumbers: true,
                 autoCloseTags: true,
-                extraKeys: {"Ctrl-Space": "autocomplete"},
+                extraKeys: { "Ctrl-Space": "autocomplete" },
                 autoCloseBrackets: true,
                 matchTags: true
             });
@@ -240,7 +246,7 @@
                 theme: "dracula",
                 lineNumbers: true,
                 autoCloseTags: true,
-                extraKeys: {"Ctrl-Space": "autocomplete"},
+                extraKeys: { "Ctrl-Space": "autocomplete" },
                 autoCloseBrackets: true,
                 matchTags: true
 
@@ -255,7 +261,7 @@
             <h2 class="float-start">Editor Preview</h2>
             <!-- button outside of iframe to call functions that make the node hosting part happen in the background and transform the iframe into seamless -->
 
-            <button class="btn-margin float-end" onclick="reloadEditor(); initIframeEditor()" title="reload editor">
+            <button class="btn float-end" onclick="reloadEditor(); initIframeEditor()" title="reload editor">
                 <i class="material-icons">refresh</i>
             </button>
         </div>
@@ -273,7 +279,7 @@
             <h2>Data</h2>
             <p>Visual representation of the data</p>
             <!-- send data got from the editor to the viewer -->
-            <button type="button" class="btn-margin btn-secondary" onclick="sendToChild(event)">Send data to viewer</button>
+            <button type="button" class="btn btn-margin btn-secondary" onclick="sendToChild(event)">Send data to viewer</button>
         </div>
         <div class="panel-body">
             <!-- here comes the data from the editor -->
@@ -287,8 +293,7 @@
         <div class="panel-heading">
             <h2 class="float-start">Viewer</h2>
             <!-- button outside of iframe to call functions that make the node hosting part happen in the background and transform the iframe into seamless -->
-            <button id="btn_reload_viewer" class="btn-margin float-end" onclick="reloadViewer(); initIframeViewer()"
-                    title="reload viewer">
+            <button id="btn_reload_viewer" class="btn float-end" onclick="reloadViewer(); initIframeViewer()" title="reload viewer">
                 <i class="material-icons">refresh</i>
             </button>
         </div>
