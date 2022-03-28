@@ -2,7 +2,7 @@ version: '3.2'
 
 services:
   microcontent-toolkit:
-    image: imagename:latest
+    image: ghcr.io/microcontent/microcontenttoolkit-2:main
     networks:
       - web
     ports:

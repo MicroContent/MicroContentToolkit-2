@@ -12,7 +12,7 @@
         
         // Connect to the parent page.
         var parent = window.seamless.connect({
-            url: 'http://localhost:8080/',
+            url: window.location.url,
             allowStyleInjection: true,
         }); 
         // Send a message
