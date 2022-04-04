@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>PoolSelectionViewer</title>
     <!-- link the seamless js from under the host folders -->
-    <script src='http://localhost:8080/node_modules/seamless/build/seamless.child.min.js'></script>
+    <script src='http://localhost:4200/assets/seamless.child.min.js'></script>
 </head>
 
 <body>
@@ -12,7 +12,7 @@
         
         // Connect to the parent page.
         var connection = window.seamless.connect({
-            url: window.location.url,
+            url: window.parent.location.href,
             allowStyleInjection: true,
         }); 
 
