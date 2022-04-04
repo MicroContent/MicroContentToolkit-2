@@ -21,17 +21,8 @@
             switch(data.type) {
                 case 'setContent':
                     // parent for varying type of input sends data as special object; data.main[0] is the array of arrays with your message inside
-                    for (var i = 1; i < data.main[0].length+1; i++){
-                        // fill your viewer content with the recieved things
-                        if (data.main[0][i][0]==('title')) {
-                            document.getElementById('title').innerHTML = data.main[0][i][1];
-                        }
-                        else if (data.main[0][i][0]==('question')) {
-                            document.getElementById('question').innerHTML = data.main[0][i][1];
-                        }
-                        
-                        
-                    } 
+                    document.getElementById('title').innerHTML =data.main[0].title;
+                    document.getElementById('question').innerHTML =data.main[0].question;
                     break;     
             }
             });

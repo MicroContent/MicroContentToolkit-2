@@ -47,8 +47,6 @@
     <!-- seamless related functions -->
     <script type="text/javascript">
         // variables to handle the data we get from the editor later
-        var editorKeys;
-        var editorValues;
         var editorObject;
 
         /**
@@ -65,14 +63,9 @@
                 switch (data.type) {
                     case 'toViewer':
                         //the data we get is in object format; to be able to handle any amount of input we use the data as it is; we only get rid of unnecessary data from the end
-                        editorKeys = Object.keys(data).slice(0, Object.entries(data).length - 1);
-                        editorValues = Object.values(data).slice(0, Object.entries(data).length - 1);
-                        //combine the two arrays into a nested array for easier handling
-                        editorObject = editorKeys.map(function (e, i) {
-                            return [e, editorValues[i]];
-                        });
+                        editorObject = data;
                 }
-                console.log("got: ", Object.values(data).slice(0, Object.entries(data).length - 1), Object.keys(data).slice(0, Object.entries(data).length - 1))
+                console.log("got: ", editorObject)
                 //display easy to interpret and user friendly but accurate data to the user
                 loadData()
 
