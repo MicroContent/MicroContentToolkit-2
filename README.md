@@ -65,22 +65,29 @@ Used libraries:<br>
 <h2>Setup your plugins</h2>
 <p> The plugin consists of two parts. The editor and viewer, both a separate html file.</p>
 <p> Editor-Viewer communication is being done through the toolkit with help of a server.</p>
-<p> Therefor there are some adjustments the plugin developers need to make for the toolkit to work</p>
+<p> Therefore there are some adjustments the plugin developers need to make for the toolkit to work</p>
+
 <ul>
   <li> Linking the seamless library from the toolkit libraries. Include this script in both plugin headers</li>
   
 ```
 <script src='http://localhost:8080/node_modules/seamless/build/seamless.child.min.js'></script>
 ```
+ 
+  > **Note**: this specific link only works when running this project. If you want to deploy the plugin, either include the 
+  ``seamless.child.min.js`` in your own project and link to that or check if the website where you want to embed the plugin 
+  exposes the script in the webpack (e.g., The SocialMicroLearning platforms expose it under `/assets/seamless.child.min.js`)
   
   <li> User needs to estabilish a connection between parents and children. Include this code in beginning of the body</li>
   
   ```
   var parent = window.seamless.connect({
-            url: 'http://localhost:8080/',
+            url: 'window.location.url',
             allowStyleInjection: true,
         }); 
   ```
+  > **Note**: Depending on the structure of the target website, you might not be able to access the url over ``window.location.url`` and might need to chain off the parent (`window.parent.location.href`)
+
   <li> The editor needs a seamless function to send data to the toolkit. This infomation can be sent according to the seamless documentaion</li>
   <p> Sending a title input and question input. More detailed code in demo-plugins folder</p>
   
