@@ -74,9 +74,14 @@ Used libraries:<br>
 <script src='http://localhost:8080/node_modules/seamless/build/seamless.child.min.js'></script>
 ```
  
-  > **Note**: this specific link only works when running this project. If you want to deploy the plugin, either include the 
-  ``seamless.child.min.js`` in your own project and link to that or check if the website where you want to embed the plugin 
-  exposes the script in the webpack (e.g., The SocialMicroLearning platforms expose it under `/assets/seamless.child.min.js`)
+  > **Note**: this specific link only works when running this project. If you want to deploy the plugin, either 
+    <ul>
+      <li> include the ``seamless.child.min.js`` in your own project and link to the raw file (you might have to 
+      redirect over jsdelivr see this <a href="https://stackoverflow.com/questions/17341122/link-and-execute-external-javascript-file-hosted-on-github">stackoverflow question</a>).</li>
+    <li> or check if the website where you want to embed the plugin
+  exposes the script in the webpack (e.g., The SocialMicroLearning platforms expose it under `/assets/seamless.child.min.js`)</li>
+    </ul>
+ 
   
   <li> User needs to estabilish a connection between parents and children. Include this code in beginning of the body</li>
   
